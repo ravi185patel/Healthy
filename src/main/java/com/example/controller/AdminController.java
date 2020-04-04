@@ -8,9 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
+@Api(value = "Swagger2DemoRestController", description = "REST APIs related to Student Entity!!!!")
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/admin")
 public class AdminController {
 
@@ -20,7 +24,12 @@ public class AdminController {
     @Autowired
     private CommonResponse commonResponse;
 
-
+    @ApiOperation(value = "Get list of Students in the System ", response = Iterable.class, tags = "getStudents")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Suceess|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!") })
     @GetMapping
     public String getHome(){
         return "adminHome";

@@ -40,12 +40,10 @@ public class Users implements Serializable {
     }
 
     public String getUserName() {
-//        System.out.println(userName);
         return userName;
     }
 
     public void setUserName(String userName) {
-//        System.out.println(userName);
         this.userName = userName;
     }
 

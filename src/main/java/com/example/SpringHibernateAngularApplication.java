@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringHibernateAngularApplication {
 
 	public static void main(String[] args) {
-
 	    SpringApplication.run(SpringHibernateAngularApplication.class, args);
 	}
 

@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.example.customeannotation.UniqueUsername;
 import com.example.entity.Account;
 import com.example.entity.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,6 +20,7 @@ public class UsersModel {
 
     @NotNull(message = "please provide Username")
     @Size(min=5,max=10,message = "Username length should be between 5 to 10")
+    @UniqueUsername(message = "username already used")
     private String userName;
 
     @NotNull(message = "please provide Password")

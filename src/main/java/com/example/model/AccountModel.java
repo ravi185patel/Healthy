@@ -2,6 +2,7 @@ package com.example.model;
 
 import com.example.customeannotation.ListValidator;
 import com.example.customeannotation.Phone;
+import com.example.customeannotation.UniqueEmail;
 import com.example.entity.Address;
 import com.example.entity.Doctor;
 import com.example.entity.Patient;
@@ -48,6 +49,7 @@ public class AccountModel {
 
     @Email(message = "please provide valid email id")
     @NotNull(message = "please provide emailid")
+    @UniqueEmail
     private String emailId;
 
     @ListValidator

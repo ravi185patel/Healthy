@@ -1,0 +1,2164 @@
+﻿MasterCard 
+
+Programs:
+
+Checksum of diagonal elements of a Matrics n*n is equal or not
+Reverse the given string word by word e.g. “Hello World” should be printed as “olleH dlroW”
+Exception handling with programs to check the output
+4.       Pascal Triangle
+
+5.       Arranging type of sequence 0101010 in 0000111. --> counting sort ( count 0 and 1, arrage based on count)
+
+6.       Write a program to find duplicate values in Array. (Without use of utility & collection classes)
+
+ 
+
+Domain: https://developer.mastercard.com/apis
+
+ 
+
+ 
+
+Design Patterns: (Questions can be asked about implementation)
+
+https://www.journaldev.com/1827/java-design-patterns-example-tutorial
+
+ 
+
+SOLID Design Principles:
+
+Explain SOLID – DIP. Code reviewing scenario for code readability and SOLID principles
+
+https://stackify.com/solid-design-principles/
+
+ 
+
+JAVA:
+
+Multithreading: ? What kind of performance improved due to multithreading? multithreading with executor framework
+
+how to restrict seralization for some members of class which is marked as Serializable? --> transiant
+ 
+to separate the mandatory and optional parameters 
+--> manadotry need to put in constructor and others should be using set method
+--> pass Optional<String> parameter.
+
+https://dzone.com/articles/optional-method-parameters
+
+StringBuffer vs StringBuilder, which one is faster? --> StringBuilder(No threading)
+
+Latest technology used -> spring boot,hibermate,jpa,swagger
+
+Thread pool – how thread pool works 
+--> threadpool create with no of threads example 5 (all 5 threads are stored in blocking queue)
+--> when task comes it will be put in blocking queue (when all thread are busy and no therad are in waiting state)
+---> after compliation of task it will return Future (if it's callable) or nothing and added to blocking queue.
+
+
+employee object is there if you have if, then how would you sort this (how would you insert the object in collection)
+--> First Employee object does not implement comparable or comparator.
+
+employee object is there and you need to insert into treemap ,hashmap as key
+--> Objects like Integer implements equals and hascode method.
+--> EMployee class need to override following two methods to store in collections 
+	1] public int hashcode() ( for finding specific index in array of hashmap)
+	2] public boolean equals(Object o) ( for finding duplicate element is there or not) 
+	
+	
+
+Internal working of HashMap. Explain equals method ?  why we need to override equals method?
+--> AS you know
+--> equals method required to find out duplcate key -> if yes then replace it's value with new value else no then add element at the end of linkedlist.
+--> java 8 new feature -> after some thresold linkedlist becomes red-black tree in hashmap
+
+Difference between HashMap, Hashtable and ConcurrentHashMap
+
+what is out of memoryexception and how does it work?what to do to resolve it?
+--> stackoverflow ->due to recurisve function (stack running out of memmory) ->
+--> heapOutOfMemmory -> due to creating objects in heap -> 
+
+Is Static inherently thread safe? -> NO
+
+How you logic to sever, how check issues
+
+How to catch exception in thread thrown by another thread -> unCaughtExceptionHandler
+
+Use of static keyword, final keyword. Where to use static and where to use volatile? Possible ways to initialise final variable. what is marker interface?
+-> static for class level variable which is common for all object of this class
+-> final for not allowing variable to inherite from parent class and also not initialize after initilazing variable
+-> In thread renvoirment , two thread execute at same time ,1st thread x's value =0 and update it 1 before updating done by thread 1, thread 2 read it get value 0 bcz
+each thread as separate cach.so volatile used to read value from memmory not from cach 
+
+-> marker interface-> Interface has no method
+-> indicate or instruct jvm to give speacial service to class which implements marker interface (serialization,cloneable,)
+
+difference between aggregation and composition.
+-> aggregation and composition is part of assosiation
+-> difference
+1] In aggregation two objects are not mutually bounded or say weakly assosiated ex. if class A has class B, when i destory B still A survive
+	real time example-> if i remove professor from university still university run.
+   In Compostion two objects are mutually bounded or say Strongly assosiated ex. if class A has class B, when i destory B then A can't survive
+	real time example-> if i remove engine from cat then car has no meaning.
+
+How linkedhashmap maintain insertion order
+-> Every element insert in linkedhashmap put in bucket with prev and next pointer which denote next inserted element's address.   
+
+Can overriden methods throw Exception higher than parent method?
+-> No
+-> Parent method must through same or higher Exception(parent) in according to child overriden method. ex child-> IOEXCEPTION , parent -> Exception
+-> Rule apply only for checked exception not for runtime exception.
+
+If interface I has method void test() and abstract class A has also method void test() and Concrete class B extends Class A and also implement Interface I then which version of test() will be implemented interface/class? Is there any preference for extend v/s implement?
+--> NO their is no prefrence 
+--> Here both method in interface and abstrac was not implemented.
+
+can a super class access members of sub class?
+-> No (parent does not know who is child's grilfriend)
+
+can interface hold protected members or method?
+--> No by default all method in interface are public abstract.
+
+how to restrict seralization for some members of class which is marked as Serializable? -> transiant
+
+Which is better ArrayList or LinkedList for traversing of 10M records? -> ArayList ( because it's implement RandomAccess interface which give ArrayList to access 
+element using index)
+
+
+If a collection have list of salaries then write suedo code to print salary and it's occurrence.
+
+Explain the difference between abstraction and encapsulation.
+- Abstraction solves the problem in the design side,while Encapsulation solves it implementation level.
+- Abstraction lets you focus on what the object does instead of how it does, while Encapsulation means hiding the internal details of how an object works.
+- Abstraction focus on outer lookout e.g. moving of vehicle while Encapsulation focuses on internal working or inner lookout e.g. how exactly the vehicle moves.
+- In Java, Abstraction is supported using interface and abstract class while Encapsulation is supported using access modifiers e.g. public, private and protected.
+
+What are class loaders?
+- It is the class that is responsible for finding and loading classes at runtime.
+
+- There are 3 types of class loader:
+	1] Bootstrap Class Loader(parent class loader): 
+	-> It loads standard JDK class files from rt.jar and other core classes.It doesn't have any parent. 
+	   When we call String.class.getClassLoader() it returns null, and any code based on it throws NullPointerException. 
+	   It is also called Primordial ClassLoader. 
+	   It loads class files from jre/lib/rt.jar. For example, java.lang package class.
+
+	2] Extensions Class Loader: 
+	-> It delegates class loading request to its parent. If the loading of a class is unsuccessful, 
+	   it loads classes from jre/lib/ext directory or any other directory as java.ext.dirs. 
+
+	3] System Class Loader: 
+	-> It loads application specific classes from the CLASSPATH environment variable. 
+	   It can be set while invoking program using -cp or classpath command line options. 
+	   It is a child of Extension ClassLoader. All Java ClassLoader implements java.lang.ClassLoader.
+	
+Static vs. Dynamic Class Loading
+-> Classes are statically loaded with "new" operator. 
+-> Dynamic class loading invokes the functions of a class loader at run time by using Class.forName() method.
+
+Difference between loadClass() and Class.forName()
+-> The loadClass() method loads only the class but does not initialize the object. While Class.forName() method initialize the object after loading it. 
+-> For example, if you are using ClassLoader.loadClass() to load the JDBC driver, class loader does not allow to load JDBC driver.
+
+-> The java.lang.Class.forName() method returns the Class Object coupled with the class or interfaces with the given string name. 
+   It throws ClassNotFoundException if the class is not found.
+   
+ClassNotFoundException	VS  NoClassDefFoundError
+1] CNFE  -> It is an exception. It is of type java.lang.Exception.
+   NCDFE -> It is an error. It is of type java.lang.Error.
+2] CNFE  -> It occurs when an application tries to load a class at run time which is not updated in the classpath.	
+   NCDFE -> It occurs when java runtime system doesn’t find a class definition, which is present at compile time, but missing at run time.
+3] CNFE  -> It is thrown by the application itself. It is thrown by the methods like Class.forName(), loadClass() and findSystemClass().	
+   NCDFE -> It is thrown by the Java Runtime System. It occurs when classpath is not updated with required JAR files. 
+			It occurs when required class definition is missing at run time.
+
+Why do you recommend that the main thread be the last to finish?
+-> In an application, a program continues to run until all of the threads have ended. Hence, the main thread to finish at last is not a requirement. 
+   It is a good programming practice to make it to run last to finish. The application execution starts by invoking main thread and the chain follows. 
+   So it is inevitable that all the threads complete their execution. Soon after the completion of the execution the control returns to main thread. 
+   Thus the flow will not be missed. And it is the main thread that starts first and also ends first.			
+
+Enumerations vs Final Variables in java
+1. Enumeration is type safe. Where as final variables are not.
+2. Enumeration supports to have a blend of various values. Where as final variables does not support multiple values.
+3. Enumeration constants can be names. Where as final constants can not be named.   
+
+***What is difference between add() and addElement() in Vector?
+
+Java methods are virtual by default.
+-> Java methods are virtual by default. The virtual methods are the methods of subclasses. 
+   They are invoked by a reference of their super class. The methods of the object are invoked when a method is invoked by using the reference to that object,
+   hence they are virtual.
+
+-> An approach followed by Java is to be able to override any method that one might need in the future. 
+   When a method is declared virtual, a call back hook is created. This greatly affects performance.
+   
+Explain the processes performed by java virtual machine, i.e. loading, linking, initialization.
+- Locating the binary representation of a type and bringing it to the JVM is the process of loading.
+
+- Linking is the process by which type and incorporating it into the runtime state of the JVM takes place, in order to execute.
+
+- Initialization is the process for executing the initializers of a type – static and field initializers. 
+  A type is garbage collected when a type becomes unreachable ( application could not find the reference).
+
+Explain the processes performed by java virtual machine, i.e. loading, linking, initialization.
+The Java virtual machine dynamically loads, links, and initializes classes and interfaces.
+
+	1. Loading is the process of finding the binary form of a class or interface type with a particular name, a Class object to represent the class or interface.
+	2. This is done perhaps by computing it on the fly, but more typically by retrieving a binary representation 
+	   previously computed from source code by a compiler and constructing, from that binary form.
+	3. The binary format of a class or interface is normally the class file format.
+	4. A class or interface type is always loaded before it is linked. Linking is the process of taking a binary form of a class or interface type 
+	   and combining it into the runtime state of the Java virtual machine, so that it can be executed.
+	5. Three different activities are involved in linking:
+		i. verification,
+		ii. preparation, and
+		iii. resolution of symbolic references.
+	6. Initialization of a class consists of executing its static initializers and the initializers for static fields declared in the class. 
+	   Initialization of an interface consists of executing the initializers for fields declared in the interface
+   
+What is the difference between factory and abstract factory pattern?
+The differences between factory and abstract factory are following:
+
+- Factory pattern is a single method but abstract factory is an object.
+- The Abstract Factory pattern is one level of abstraction higher than the factory pattern.
+- Factory pattern generally returns the common parent class or method whereas the abstract factory pattern returns the one of the several factories.
+
+   
+J2EE:
+
+What are the different Authentication Options available in Servets?
+- Authentication options available in Servlets: There are four different options for authentication in servlet:
+
+	1. Basic Authentication : Username and password provided by the client to authenticate the user.
+	2. Form-based authentication : In this the login form is made by the programmer by using HTML.
+	3. Digest Authentication : It is similar to basic authentication but in this the passwords are encrypted using Hash formula. This makes digest more secured.
+	4. Client certificate Authentication : It requires that each client accessing the resource has a certificate that it sends to authenticate itself. 
+		This requires SSL protocol.
+
+
+
+what types of jdbc drivers are there ?
+
+Difference between statement and preparedStatement ?
+
+Life cycle of servlet and jsp ?
+
+Is service method is compulsory to override while developing servlet application ?
+
+Different element of jsp ?
+
+where to define servlet loading preference?
+
+how session is managed in your application?
+
+queue vs topic
+ 
+
+Microservices:
+
+How does Microservice Architecture work?
+
+What is the difference between Monolithic, SOA and Microservices Architecture?
+
+How do you manage logging with Microservices ?
+
+How do you monitor microservices?
+
+How to deploy multiple microservices to docker?
+
+Micro services degrade performance due to increased http latency how do you minimize the http latency?
+
+How to implement CQRS deign pattern in already existing  web services.
+
+ 
+
+Spring Boot:
+
+Why have you used spring boot in your project?
+
+How Springboot is initialised? What exactly happens when Springboot is initialised?
+
+How to create pool of objects in Spring?
+
+How to configure Spring Security in our Spring Boot application?
+
+Difference between Spring MVC and Spring Boot?
+
+What all are annotation you have used in Spring Boot?
+
+why Spring Boot is being used in stand-alone application
+
+Spring Cloud and cloud native architecture
+
+What does one mean by Load Balancing ? How is it implemented in Spring Cloud
+
+https://www.concretepage.com/interview/spring-interview/spring-boot-interview-questions
+
+
+Spring MVC:
+
+How security is maintain in Spring
+
+Explain Dependency Injection
+
+Spring bean scopes and default scope. which scope destroy first request or singleton
+
+Is Spring bean thread safe ?
+
+Spring Hibernate integration configuration.
+
+Autowiring prototypes into singleton beans
+
+web application context vs parent application context
+
+Annotation used in Spring : @Qualifier,@Autowired,@Required, @Transactional
+
+Question on Spring JPA and Plain JDBC
+
+How do I handle exceptions in Spring MVC Framework?
+
+write your own implementation for @autowired
+
+Why to use annotation then xml in spring
+
+Difference between BeanFactory and Application context
+
+when to use Interceptor and when to use Filter.
+
+what is spring AOP where you have used in your implementation?
+
+How to enable security in spring framework .Which annotations used to enable security?
+->EnableWebMvc
+->EnableWebSecurity
+
+How we can avoid bean ambiguity error in spring and possible ways
+-> @Qualifier with @Autowired.
+-> user @Primary
+-> use byName (provide name of injected class)
+
+How to override default behavior of method for class which you don't have rights to modify in Spring?
+-> extends it and override method whose behavior you need to change
+-> add that class bean in spring context
+-> use in other class where you want to use.
+
+ 
+
+Hibernate:
+
+Why ORM for very simplistic mapping?
+
+Different levels of caching
+
+Who is the owner of the one to many relationship
+
+How can you configure your POJO files with current database
+
+What changes are required to switch from JDBC to hibernate
+
+What is lazy loading in hibernate? get() and load() meethod in hibernate?
+
+What is sessionfactory in hibernate?
+
+What is criteria and restriction in hibernate ? some scenario question on criteria ?
+
+ 
+
+Web-services:
+
+Rest services status code
+
+Difference between pathparam and queryparam
+
+How to make client for SOAP webservices
+
+How to create REST webservices with spring(Which annotations required) ? 
+
+Did you know Jersey implementation for restful webservices
+
+How to create rest client to accept JSON response
+
+How to create Soap webservices with spring(what is contract first approach)?
+
+a difference between authentication and authorization.Difference between HTTP and HTTPS
+
+What if we have too many hits coming ex 10 millions but your rest can only handle 5 millions what will you do ?
+Frameworks for JSON to object and vice versa transformation ? For such a transformation library what would you prefer, fields or setters/getters ? setters/getters
+
+How is exception / error condition communicated back to client in SOAP Web Services?
+
+XML Parsing techniques, Usecase?
+
+How do you secure a rest webservice with username and a password   
+
+               
+
+Extra:
+
+Jdbc Template
+
+Knows about Jenkins pipeline
+
+Develop bookmyshow ticket booking usecase diagram, Implement the logic
+
+Which Logging frameworks you have used. Explain Slf4J logging framework.
+
+What is Level in logging. How to limit logging for only INFO, DEBUG and ERROR messages.
+
+How do you investigate if user is facing unable to Login in system.
+
+Do you have used Linux terminal. What was the purpose.
+
+Do you have used Putty client or any SSH client.
+
+How do you secure your application.
+
+How did you achieve internationalization functionality in your application.
+
+Which application servers do you have used.
+
+What is difference between Apache Tomcat and Apache HTTP Server.
+
+Can we use Apache Tomcat along with any HTTP Server.
+
+How do you handle database transaction failure.
+
+Explain Java memory management functionality. What is heap memory, stack memory, PermGen and so on.
+
+
+Accenture
+
+Accenture
+-------------
+
+JDK JRE JVM JIT
+Is java interpreted or compiled language?
+How to achieve abstraction.
+How would you hide internal details from programmer in abstraction.
+Can we write abstract method as static.
+Abstract as final.
+Override static final method.
+Why main method is static
+Can we write main method as final
+Overridden method in parent class throws Arithmetic exception in child class it doesn't throw exception is it still override?
+Explain 5 oops concepts.
+What is aggregation and composition?
+Switch(null) will execute default block or throw exception?
+Can you save a java file name as .java without specifying any name? CE
+
+String s = new String("abc")
+String s1 = new String("abc");
+s.equals(s1)
+What if we use StringBuffer in place of String class with equals method?
+
+Strin s = new String ("sachin");
+s.append("tendulkar");
+Sout(s);
+Same example with string buffer
+Sout(s);
+
+
+Barclays
+
+Barclays
+______________________________________
+
+Technical round
+---------------------
+
+What is serialazation? Why it is called marker interface?
+
+What is JSON
+
+REST API. how to integrate?
+How to test apis?
+(Tools like SOAP UI, POSTMAN)
+How to make rest api secure that no one can direcltly access it ?
+
+Rest session management
+
+Seperate threads for seperate users.
+Executor framework
+
+How to preven ArrayIndexOutofBounds Exception
+
+Exception handling - all key words
+What is throwable ?
+
+HashMap vs HashTable
+
+HashSet vs HashMap
+
+How to cache your objects
+(LinkedHashSet)
+
+Build Management Tools you use
+(Maven, ant, gradle etc...)
+
+Which model you use for software development?
+(Waterfall)
+
+What is dictionary
+
+Behavioural round
+------------------------
+
+A friend wants to access your system for a minute using your id and password as he has some serious urgency. Would you allow him or deny him ?
+
+Cybage - sept 8 2018
+
+Cybage - sept 8 2018
+------------------------
+
+Jsp objects
+Bootstrap
+Session creation ways
+Spring bean scopes
+Spring aop
+Spring DI
+HIBERNATE
+SINGLETON CREATE ?
+DESIGN METHODOLOGIES
+Design patterns
+Set internal implementation
+Difference : list n set
+Diff  vector n list
+Immutable
+How to create your immutable class
+Soap Rest difference
+
+What error codes u get in REST
+INTERCHANGE TWO VARIABLES WITHOUT USING ARITHMATIC OPERATOR
+
+DEPENDENCY INJECTION
+AOP
+Annotations - custom annotations
+
+Externalizable
+How to serialize part of an object
+Spring jdbc
+
+Make a class immutable
+Spring bean scopes
+
+How to create compiletime exception
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Net Web
+
+Net web
+----------
+
+Connection pooling
+Executor Framework
+Multicolumn index
+Nested exception
+Catch exception in three 2 out of 3 threads
+Interface abstract class
+List l = new ArrayList advantage over ArrayList l = new ArrayList
+Try with resources and will it also close connection object ?
+Iterate over list different ways
+Difference bw HashSet vs HashMap
+Cache memory collection object
+REST API with spring
+@request annotation
+Session mngmnt
+Copy session into other session variable and destroy the first session will it get destroyed
+String immutable
+How to create an immutable class
+Exception handling on jsp page
+Convert array to list
+How to handle out of memory issue
+Api not responding. How would you manage it?
+
+Update a duplicating record on a table which doesn't have a primary key.
+
+All Oops concepts
+Servlet life cycle
+Connection pooling
+Thread pool
+How to create Database like what basic criteria you follow
+How to connect JAVA and MYSQL
+Explain in mysql
+As a developer, which take of care you followed about ur work..
+Singleton design pattern
+Java.sql.date vs Java.utility.date
+Index in database
+
+
+#Java_Lovers : 125 Basic Core Java Iinterview Questions.!
+
+What is the  feature of Java?
+
+Java is a platform independent language.
+
+What is mean by platform independence?
+
+Platform independence means that we can write and compile the
+java code in one platform (eg Windows) and can execute the
+class in any other supported platform eg (Linux,Solaris,etc).
+
+Are JVM’s platform independent?
+
+JVM’s are not platform independent. JVM’s are platform specific run time implementation provided by the vendor.
+
+What is a JVM?
+JVM is Java Virtual Machine which is a run time environment for the compiled java class files.
+
+What is the difference between a JDK and a JVM?
+JDK is Java Development Kit which is for development purpose and it includes execution environment also. But JVM is purely a run time environment and hence you will not be able to compile your source files using a JVM.
+
+What is a pointer and does Java support pointers?
+Pointer is a reference handle to a memory location. Improper handling of pointers leads to memory leaks and reliability issues hence Java doesn’t support the usage of pointers.
+
+What is the base class of all classes?
+java.lang.Object
+
+Does Java support multiple inheritance?
+Java doesn’t support multiple inheritance.
+
+Is Java a pure object oriented language?
+Java uses primitive data types and hence is not a pure object oriented language.
+
+Are arrays primitive data types?
+In Java, Arrays are objects.
+
+What is difference between Path and Classpath?
+Path and Classpath are operating system level environment variales. Path is used define where the system can find the executables(.exe) files and classpath is used to specify the location .class files.
+
+What are local variables?
+Local varaiables are those which are declared within a block of code like methods. Local variables should be initialised before accessing them.
+
+What are instance variables?
+Instance variables are those which are defined at the class level. Instance variables need not be initialized before using them as they are automatically initialized to their default values.
+
+How to define a constant variable in Java?
+The variable should be declared as static and final. So only one copy of the variable exists for all instances of the class and the value can’t be changed also.
+static final int PI = 2.14; is an example for constant.
+
+Should a main method be compulsorily declared in all java classes?
+No not required. main method should be defined only if the source class is a java application.
+
+What is the return type of the main method?
+Main method doesn’t return anything hence declared void.
+
+Why is the main method declared static?
+main method is called by the JVM even before the instantiation of the class hence it is declared as static.
+
+What is the arguement of main method?
+main method accepts an array of String object as arguement.
+
+Can a main method be overloaded?
+Yes. You can have any number of main methods with different method signature and implementation in the class.
+
+Can a main method be declared final?
+Yes. Any inheriting class will not be able to have it’s own default main method.
+
+Does the order of public and static declaration matter in main method?
+No it doesn’t matter but void should always come before main().
+Can a source file contain more than one Class declaration?
+Yes a single source file can contain any number of Class declarations but only one of the class can be declared as public.
+
+What is a package?
+Package is a collection of related classes and interfaces. package declaration should be first statement in a java class.
+
+Which package is imported by default?
+java.lang package is imported by default even without a package declaration.
+
+Can a class declared as private be accessed outside it’s package?
+Not possible.
+Can a class be declared as protected?
+A class can’t be declared as protected. only methods can be declared as protected.
+
+What is the access scope of a protected method?
+A protected method can be accessed by the classes within the same package or by the subclasses of the class in any package.
+What is the purpose of declaring a variable as final?
+A final variable’s value can’t be changed. final variables should be initialized before using them.
+
+What is the impact of declaring a method as final?
+A method declared as final can’t be overridden. A sub-class can’t have the same method signature with a different implementation.
+I don’t want my class to be inherited by any other class. What should i do?
+You should declared your class as final. But you can’t define your class as final, if it is an abstract class. A class declared as final can’t be extended by any other class.
+
+Can you give few examples of final classes defined in Java API?
+java.lang.String,java.lang.Math are final classes.
+
+How is final different from finally and finalize?
+final is a modifier which can be applied to a class or a method or a variable. final class can’t be inherited, final method can’t be overridden and final variable can’t be changed.
+finally is an exception handling code section which gets executed whether an exception is raised or not by the try block code segment.
+finalize() is a method of Object class which will be executed by the JVM just before garbage collecting object to give a final chance for resource releasing activity.
+
+Can a class be declared as static?
+No a class cannot be defined as static. Only a method,a variable or a block of code can be declared as static.
+
+When will you define a method as static?
+When a method needs to be accessed even before the creation of the object of the class then we should declare the method as static.
+
+What are the restriction imposed on a static method or a static block of code?
+A static method should not refer to instance variables without creating an instance and cannot use “this” operator to refer the instance.
+
+I want to print “Hello” even before main is executed. How will you acheive that?
+Print the statement inside a static block of code. Static blocks get executed when the class gets loaded into the memory and even before the creation of an object. Hence it will be executed before the main method. And it will be executed only once.
+
+What is the importance of static variable?
+static variables are class level variables where all objects of the class refer to the same variable. If one object changes the value then the change gets reflected in all the objects.
+
+Can we declare a static variable inside a method?
+Static varaibles are class level variables and they can’t be declared inside a method. If declared, the class will not compile.
+
+What is an Abstract Class and what is it’s purpose?
+A Class which doesn’t provide complete implementation is defined as an abstract class. Abstract classes enforce abstraction.
+
+Can a abstract class be declared final?
+Not possible. An abstract class without being inherited is of no use and hence will result in compile time error.
+
+What is use of a abstract variable?
+Variables can’t be declared as abstract. only classes and methods can be declared as abstract.
+
+Can you create an object of an abstract class?
+Not possible. Abstract classes can’t be instantiated.
+
+Can a abstract class be defined without any abstract methods?
+Yes it’s possible. This is basically to avoid instance creation of the class.
+
+Class C implements Interface I containing method m1 and m2 declarations. Class C has provided implementation for method m2. Can i create an object of Class C?
+No not possible. Class C should provide implementation for all the methods in the Interface I. Since Class C didn’t provide implementation for m1 method, it has to be declared as abstract. Abstract classes can’t be instantiated.
+Can a method inside a Interface be declared as final?
+No not possible. Doing so will result in compilation error. public and abstract are the only applicable modifiers for method declaration in an interface.
+
+Can an Interface implement another Interface?
+Intefaces doesn’t provide implementation hence a interface cannot implement another interface.
+
+Can an Interface extend another Interface?
+Yes an Interface can inherit another Interface, for that matter an Interface can extend more than one Interface.
+
+Can a Class extend more than one Class?
+Not possible. A Class can extend only one class but can implement any number of Interfaces.
+Why is an Interface be able to extend more than one Interface but
+
+a Class can’t extend more than one Class?
+Basically Java doesn’t allow multiple inheritance, so a Class is restricted to extend only one Class. But an Interface is a pure abstraction model and doesn’t have inheritance hierarchy like classes(do remember that the base class of all classes is Object). So an Interface is allowed to extend more than one Interface.
+
+Can an Interface be final?
+Not possible. Doing so so will result in compilation error.
+
+Can a class be defined inside an Interface?
+Yes it’s possible.
+Can an Interface be defined inside a class?
+Yes it’s possible.
+
+What is a Marker Interface?
+An Interface which doesn’t have any declaration inside but still enforces a mechanism.
+
+Which OO Concept is achieved by using overloading and overriding?
+Polymorphism.
+
+If i only change the return type, does the method become overloaded?
+No it doesn’t. There should be a change in method arguements for a method to be overloaded.
+
+Why does Java not support operator overloading?
+Operator overloading makes the code very difficult to read and maintain. To maintain code simplicity, Java doesn’t support operator overloading.
+
+Can we define private and protected modifiers for variables in interfaces?
+No
+
+What is Externalizable?
+Externalizable is an Interface that extends Serializable Interface. And sends data into Streams in Compressed Format. It has two methods, writeExternal(ObjectOuput out) and readExternal(ObjectInput in)
+
+What modifiers are allowed for methods in an Interface?
+Only public and abstract modifiers are allowed for methods in interfaces.
+
+What is a local, member and a class variable?
+Variables declared within a method are “local” variables. Variables declared within the class i.e not within any methods are “member” variables (global variables). Variables declared within the class i.e not within any methods and are defined as “static” are class variables
+
+What is an abstract method?
+An abstract method is a method whose implementation is deferred to a subclass.
+What value does read() return when it has reached the end of a file?
+The read() method returns -1 when it has reached the end of a file.
+Can a Byte object be cast to a double value?
+No, an object cannot be cast to a primitive value.
+
+What is the difference between a static and a non-static inner class?
+A non-static inner class may have object instances that are associated with instances of the class’s outer class. A static inner class does not have any object instances.
+What is an object’s lock and which object’s have locks?
+An object’s lock is a mechanism that is used by multiple threads to obtain synchronized access to the object. A thread may execute a synchronized method of an object only after it has acquired the object’s lock. All objects and classes have locks. A class’s lock is acquired on the class’s Class object.
+
+What is the % operator?
+It is referred to as the modulo or remainder operator. It returns the remainder of dividing the first operand by the second operand.
+When can an object reference be cast to an interface reference?
+An object reference be cast to an interface reference when the object implements the referenced interface.
+Which class is extended by all other classes?
+The Object class is extended by all other classes.
+
+Which non-Unicode letter characters may be used as the first character of an identifier?
+The non-Unicode letter characters $ and _ may appear as the first character of an identifier
+What restrictions are placed on method overloading?
+Two methods may not have the same name and argument list but different return types.
+
+What is casting?
+There are two types of casting, casting between primitive numeric types and casting between object references. Casting between numeric types is used to convert larger values, such as double values, to smaller values, such as byte values. Casting between object references is used to refer to an object by a compatible class, interface, or array type reference.
+What is the return type of a program’s main() method?
+void.
+
+If a variable is declared as private, where may the variable be accessed?
+A private variable may only be accessed within the class in which it is declared.
+What do you understand by private, protected and public?
+These are accessibility modifiers. Private is the most restrictive, while public is the least restrictive. There is no real difference between protected and the default type (also known as package protected) within the context of the same package, however the protected keyword allows visibility to a derived class in a different package.
+
+What is Downcasting ?
+Downcasting is the casting from a general to a more specific type, i.e. casting down the hierarchy
+What modifiers may be used with an inner class that is a member of an outer class?
+A (non-local) inner class may be declared as public, protected, private, static, final, or abstract.
+
+How many bits are used to represent Unicode, ASCII, UTF-16, and UTF-8 characters?
+Unicode requires 16 bits and ASCII require 7 bits. Although the ASCII character set uses only 7 bits, it is usually represented as 8 bits. UTF-8 represents characters using 8, 16, and 18 bit patterns. UTF-16 uses 16-bit and larger bit patterns.
+
+What restrictions are placed on the location of a package statement within a source code file?
+A package statement must appear as the first line in a source code file (excluding blank lines and comments).
+What is a native method?
+A native method is a method that is implemented in a language other than Java.
+
+What are order of precedence and associativity, and how are they used?
+Order of precedence determines the order in which operators are evaluated in expressions. Associatity determines whether an expression is evaluated left-to-right or right-to-left
+Can an anonymous class be declared as implementing an interface and extending a class?
+An anonymous class may implement an interface or extend a superclass, but may not be declared to do both.
+What is the range of the char type?
+The range of the char type is 0 to 2^16 – 1.
+What is the range of the short type?
+The range of the short type is -(2^15) to 2^15 – 1.
+
+Why isn’t there operator overloading?
+Because C++ has proven by example that operator overloading makes code almost impossible to maintain.
+What does it mean that a method or field is “static”?
+Static variables and methods are instantiated only once per class. In other words they are class variables, not instance variables. If you change the value of a static variable in a particular object, the value of that variable changes for all instances of that class. Static methods can be referenced with the name of the class rather than the name of a particular object of the class (though that works too). That’s how library methods like System.out.println()
+work. out is a static field in the java.lang.System class.
+
+Is null a keyword?
+The null value is not a keyword.
+Which characters may be used as the second character of an identifier,but not as the first character of an identifier?
+The digits 0 through 9 may not be used as the first character of an identifier but they may be used after the first character of an identifier.
+Is the ternary operator written x : y ? z or x ? y : z ?
+It is written x ? y : z.
+
+How is rounding performed under integer division?
+The fractional part of the result is truncated. This is known as rounding toward zero.
+If a class is declared without any access modifiers, where may the class be accessed?
+A class that is declared without any access modifiers is said to have package access. This means that the class can only be accessed by other classes and interfaces that are defined within the same package.
+
+Does a class inherit the constructors of its superclass?
+A class does not inherit constructors from any of its superclasses.
+Name the eight primitive Java types.
+The eight primitive types are byte, char, short, int, long, float, double, and boolean.
+
+What restrictions are placed on the values of each case of a switch statement?
+During compilation, the values of each case of a switch statement must evaluate to a value that can be promoted to an int value.
+
+What is the difference between a while statement and a do statement?
+A while statement checks at the beginning of a loop to see whether the next loop iteration should occur. A do statement checks at the end of a loop to see whether the next iteration of a loop should occur. The do statement will always execute the body of a loop at least once.
+
+What modifiers can be used with a local inner class?
+A local inner class may be final or abstract.
+When does the compiler supply a default constructor for a class?
+The compiler supplies a default constructor for a class if no other constructors are provided.
+
+If a method is declared as protected, where may the method be accessed?
+A protected method may only be accessed by classes or interfaces of the same package or by subclasses of the class in which it is declared.
+
+What are the legal operands of the instanceof operator?
+The left operand is an object reference or null value and the right operand is a class, interface, or array type.
+
+Are true and false keywords?
+The values true and false are not keywords.
+
+100.What happens when you add a double value to a String?
+The result is a String object.
+
+101.What is the diffrence between inner class and nested class?
+When a class is defined within a scope od another class, then it becomes inner class. If the access modifier of the inner class is static, then it becomes nested class.
+
+102.Can an abstract class be final?
+An abstract class may not be declared as final
+
+103.What is numeric promotion?
+Numeric promotion is the conversion of a smaller numeric type to a larger numeric type, so that integer and floating-point operations may take place. In numerical promotion, byte, char, and short values are converted to int values. The int values are also converted to long values, if necessary. The long and float values are converted to double values, as required
+
+104.What is the difference between a public and a non-public class?
+A public class may be accessed outside of its package. A non-public class may not be accessed outside of its package.
+
+105.To what value is a variable of the boolean type automatically initialized?
+The default value of the boolean type is false
+
+106.What is the difference between the prefix and postfix forms of the ++ operator?
+The prefix form performs the increment operation and returns the value of the increment operation. The postfix form returns the current value all of the expression and then performs the increment operation on that value.
+
+107.What restrictions are placed on method overriding?
+Overridden methods must have the same name, argument list, and return type. The overriding method may not limit the access of the method it overrides. The overriding method may not throw any exceptions that may not be thrown by the overridden method.
+
+108.What is a Java package and how is it used?
+A Java package is a naming context for classes and interfaces. A package is used to create a separate name space for groups of classes and interfaces. Packages are also used to organize related classes and interfaces into a single API unit and to control accessibility to these classes and interfaces.
+
+109.What modifiers may be used with a top-level class?
+A top-level class may be public, abstract, or final.
+
+110.What is the difference between an if statement and a switch statement?
+The if statement is used to select among two alternative
+
+
+Virtusa via evoke HR
+
+
+
+• Questions asked for client interview - citi bank
+
+Round - 1
+----------------
+
+Write Login flow with spring framework
+
+Round - 2
+-----------------
+
+- SerialVersionUID compulsory via serialazation?
+Internally jvm creates it?
+
+- What is volatile?
+
+- What is transient?
+
+- What values you don't want to serialize ?
+
+- What is callable ?
+
+- Difference callable vs runnable
+
+- What is executor framework?
+
+- Difference between wait and sleep
+
+- Where do you find the notify, wait and notifyall methods? Why these methods are in Object class?
+
+- How synchronized method works?
+Static synchronized and instance synchronized methods?
+- Can multiple threads have simultaneous access of both methods?
+
+- What is ConcurrentHashMap?
+
+- How many threads can work on a concurrenthashmap
+
+- What is failfast?
+
+- What is the contract between equals and hashcode?
+
+- parent class method throws IOEXCEPTION.
+child class overridden method throws EXCEPTION.
+- Is the above scenario valid? Will it still override?
+- Will it give run time or compile time error or no error?
+
+- can we throw compile time exceptions?
+
+Set s = new HashSet()
+s.add(new String("123"));
+s.add(new Integer(1));
+
+Is above thing possible in set?
+- What if we use tree set? Is above insertion possible?
+
+- Set s = new HashSet();
+s.add(new String("123"));
+s.add("123");
+s.size(); ?
+
+s.add(new Employee("123"));
+s.add(new Employee("123"));
+s.size(); ?
+
+- what is comparable and comprator ? When to use them ?
+
+- what is generics?
+- what are different usages of it?
+
+
+
+
+
+Java 8
+------------
+
+- What are the new features?
+
+- What is lambda expression?
+
+Logical
+------------
+
+- If a clock shows 3:30. What is the angle between hour and minute hand?
+
+- A list contains random numeric numbers upto 1 lakh values - you need to give a numeric number - find the closest numeric number to the given number?
+
+- I want to count occurrence of each word in your resume. How efficiently it can be done?
+
+Spring & Hibernate
+-------------------------------
+
+- What annotations of spring you know?
+
+- What is @service
+
+- What are the annotations in Spring Rest API?
+
+- different methods of SPRING WITH REST
+Difference bw post and put
+
+- Which jar you use for accessing rest api?
+
+- Bean scopes explain
+
+- Different types of cache in hibernate?
+
+- Different types of queries supported in hibernate?
+
+- Different APIs used with hibernate.
+
+- Explain annotations used with hibernate.
+
+- Difference bw get and load method.
+
+- What is dynamic query in hibernate?
+
+- What are different types of mappings in hibernate?
+
+- what are the different hibernate states ?
+
+
+
+Sanni Interview
+
+[19/10, 11:32 am] Sanni NJ: General
+Introduce yourself
+What processes have you followed in your previous projects?
+What challenges have you faced in your past project?
+How do you fix bugs? By yourself or by taking help from others?
+Questions on past projects’ tools and technologies
+How do you perform under pressure?
+Bugs on critical functionality  which u have never worked and no one to support/help how to fix/approach .Timelines/estimates/approach for that bug
+
+Java/J2EE
+Rate yourself on a scale of 1-10 in various technologies
+OOPS Concepts
+All String classes
+Collections
+Spring MVC, IOC
+ORM and Hibernate: Annotations and examples
+Hibernate Session and related details
+Soap Web Services(With implementation and security details questions follows)
+Rest Web Services(With implementation and security details, packages, response/integration with frontend)
+Http methods(questions on details with policies, requests ,headers, body for different types etc.)
+
+Database
+SQL questions and DBs worked on
+Usage of joins with examples
+Procedures and functions
+
+
+
+
+
+Security
+Hashing and Encryption: Differences and algorithms
+SSO, OAuth, XSS(Tokens usages and security vulnerabilities)
+Proxies types(and other details why they are used like reverse/forward proxies)
+SSO, OAuth, XSS(Tokens usages and security vulnerabilities)
+Spring Security
+SQL Injection, User Isolation
+HTTPS Protocol: Different properties and headers to make it secure (HSTS, X-XSS, etc)
+
+Others
+Asynchronous messaging/processing understanding and few details
+Application/web servers knowledge and experience(server and configuration knowledge)
+Login functionality and few questions on web application designs
+
+1)      Cookies: How cookies are stored and is it possible to read cookies from server side?
+2)      What is mean by hibernate session?
+3)      How EJB works?
+4)      Basic Java Script questions
+5)      Difference between StringBuffer and StringBuilder
+6)      How to implement asynchronous implementation in REST API’s (using concurrent packages)
+7)      Basic steps followed while code review
+8)      How to secure REST API’s?
+[19/10, 11:34 am] Sanni NJ: Introduction
+[19/10, 11:34 am] Sanni NJ: Asynchronous messaging
+[19/10, 11:34 am] Sanni NJ: Soap
+[19/10, 11:34 am] Sanni NJ: Rest
+[19/10, 11:34 am] Sanni NJ: Soap wsdl
+[19/10, 11:34 am] Sanni NJ: Http cookie
+[19/10, 11:34 am] Sanni NJ: Rest security
+[19/10, 11:34 am] Sanni NJ: Overloading and overriding
+[19/10, 11:34 am] Sanni NJ: Abstract class
+[19/10, 11:35 am] Sanni NJ: Final classd
+[19/10, 11:35 am] Sanni NJ: Arraylist
+[19/10, 11:35 am] Sanni NJ: Linkedhashmap , hashmap
+[19/10, 11:35 am] Sanni NJ: Linked list , doubly linked list
+[19/10, 11:35 am] Sanni NJ: Hibernate session
+[19/10, 11:35 am] Sanni NJ: Orm
+[19/10, 11:35 am] Sanni NJ: Get , post
+[19/10, 11:35 am] Sanni NJ: Troubleshooting
+[19/10, 11:35 am] Sanni NJ: JMS topic  vs queue
+[19/10, 11:35 am] Sanni NJ: Inner join , outer join
+
+
+Accenture
+
+Accenture
+-------------
+
+JDK JRE JVM JIT
+Is java interpreted or compiled language?
+How to achieve abstraction.
+How would you hide internal details from programmer in abstraction.
+Can we write abstract method as static.
+Abstract as final.
+Override static final method.
+Why main method is static
+Can we write main method as final
+Overridden method in parent class throws Arithmetic exception in child class it doesn't throw exception is it still override?
+Explain 5 oops concepts.
+What is aggregation and composition?
+Switch(null) will execute default block or throw exception?
+Can you save a java file name as .java without specifying any name? CE
+
+String s = new String("abc")
+String s1 = new String("abc");
+s.equals(s1)
+What if we use StringBuffer in place of String class with equals method?
+
+Strin s = new String ("sachin");
+s.append("tendulkar");
+Sout(s);
+Same example with string buffer
+Sout(s);
+
+
+Accenture
+
+Carry documents
+
+Corejava
+Servlet
+Jsp
+Java script
+jQuery
+
+Handle exception without catch block
+Inheritance
+Detect loop in singly linked list
+Iterate link list
+Slq inner join vs left join wild cards
+
+                                                     
+Good to Have Skills :
+
+J2EE,
+CORE JAVA
+Collections
+Multithreading
+JSP
+Servlet
+
+hands on experience in :
+Spring ,
+Hibernate
+
+Unit Testing using Junit 5
+
+Should have sound knowledge in Database SQL
+
+30 day Notice Period
+
+What do you know about Accenture
+
+
+Pruthvi interviews
+
+Amdocs
+
+String rotation
+Why React
+How jQuery works
+SVN vs GitHub
+To people working on same method and one commit what about second one - SVN
+Rest vs soap
+Design pattern
+
+Eclinical
+
+Test
+
+Design pattern
+Singleton class
+Abstract method and class examples - like what will be the output
+Call static method before static block - ans static variable
+Map output with 2 null keys
+Hashset and treeset different
+
+Defined oop concept - real time - non technical lang
+How to put object as a key in map example
+Program to count number of occurrence of numbers in list.
+
+How to load predefined values once from database - ans use class level variable
+Send mail after login without delay in redirection - ans servlet context listener
+Program for Factorial
+
+
+Barclays
+
+Barclays
+______________________________________
+
+Technical round
+---------------------
+
+What is serialazation? Why it is called marker interface?
+
+What is JSON
+
+REST API. how to integrate?
+How to test apis?
+(Tools like SOAP UI, POSTMAN)
+How to make rest api secure that no one can direcltly access it ?
+
+Rest session management
+
+Seperate threads for seperate users.
+Executor framework
+
+How to preven ArrayIndexOutofBounds Exception
+
+Exception handling - all key words
+What is throwable ?
+
+HashMap vs HashTable
+
+HashSet vs HashMap
+
+How to cache your objects
+(LinkedHashSet)
+
+Build Management Tools you use
+(Maven, ant, gradle etc...)
+
+Which model you use for software development?
+(Waterfall)
+
+What is dictionary
+
+Behavioural round
+------------------------
+
+A friend wants to access your system for a minute using your id and password as he has some serious urgency. Would you allow him or deny him ?
+
+
+
+
+
+
+
+
+
+IBM Qs
+
+IBM QS
+----------
+
+Tell me about your project.
+When to use primary data types and wrapper data type?
+String s = new Object() valid ?
+HashMap vs ConcurrentHashMap
+StringBuffer vs StringBuilder
+ArayList methods
+Object class methods
+Abstract class questions
+Immutability questions
+How to make your own immutable class
+How to make list synchronized
+Multiple inheritance java. Why it doesn't support it even its an OOP.
+
+
+
+Sanni Qs
+
+Sanni Qs
+-----------
+
+Which technology are using at UI side?
+Describe flow of ur current project.
+Describe architecture of your current project.
+What is mvc in string?
+Which part of spring u are currently using in your project?
+What is dependency injection in string?
+What is design pattern?
+What is entry in java?
+Write the flow to iterate value from map using Iterator.
+Why should I use Iterator to iterate from map instead foreach?
+What is different between hashtable and hasmap?
+What is concurrenthashmap?
+Difference between concurrenthashmap and hashtable?
+Difference between arraylist and linkedlist?
+Which would better if I want to remove random element from linkedlist and arraylist?
+What is runtime exception and what is compiletime exception? Write the program for each to handle.
+What is custom exception ? Write code to write custom exception.
+What is abstraction and what is interface in java?
+When to use abstraction and when to use interface?
+What is difference between soap and rest?
+can I write constructor inside abstract class?
+Is Apache tomcat is webserver or application server?  If web then howand if application then how?
+what is jstl tag?
+Can I write my custom jstl tag? Yes then can you write down one custom jstl tag mean what should I do to write custom jstl tag?
+What is scriplet in jsp?
+Why should I avoid to write it inside jsp?  What should happen after compilation of scriplet code in jsp page?
+What is life cycle of jsp?
+If I am using override method and if I am using it with exception but in that case if I am giving exception in base class's method but not in child class's method?
+Then what happen ?
+
+At that time if you are giving unchecked exception then it will not throw exception but if you are using checked exception at that time compiler will throw exception.
+
+What happen if I am giving asing Id and name with the same value to Employee bean class  and add it Set?
+
+Is it will be addable or not?
+
+Why should I use spring framework but not spring?
+
+What happen it I am making one final variable with value 15 and access it using value 10 and againg try to change the value of that variable with the other object of same class?
+
+And what if same thing will be happen with giving static as well with final?
+
+Can I use constructor inside abstract class? Why?
+
+What is immutable in java? Which java class is immutable in java except string?
+
+Is class will be compile if I will write override method in base class with return type int and in child class with return type Wrapper class Integer?
+
+What is difference between set and List
+What is inner implement of set method
+
+PS: please also see internal implementation of add method of string.
+
+Final finally and finalize
+
+Method overloading method overriding.
+
+howmany null values are allowed by hashmap?
+Threads start process,
+
+IO concepts right syntax
+
+Jar file initialization
+
+Jar file execution without using external call
+
+One transaction regarding questions, transaction Attribute Type questions.valid transaction in EE.
+
+When Heap memory leakage in java program.
+
+When deadlock occurs?
+
+Threads state when come in picture
+
+Object referance equal and == method
+
+String comparison method
+
+Strings all methods deep concept
+When string comparisopn gives true using matcher equal and ==
+
+Solution to avoid memory leak
+
+Jar Deployment regarding questions.
+
+File delete, file replace concept
+
+String mutable immutable concept
+
+String heap question.
+
+Find program bug and have to need immediate solution.
+
+Inheritance , interface rules concept.
+
+Method overloading overriding concept.
+
+This() super() concept.
+
+Constructor calling concept.
+
+volatile transient synchronized keyword concept.
+
+Inserion order in collection using set.
+
+Bug finding problem.
+
+Output for given program.
+
+Which Method call using which object call.
+
+Inner class outer class variable access rules.
+
+Generic class calling question , 2 questions.
+
+Jsp object method questions.
+
+Jsp object method Deep question.
+
+Servlet questions. How to compile jsp pages.
+
+Stringbuffer stringbuffer concept and methods.
+
+Multithread question.
+
+@annotation while using method overriding.
+
+Public static projected modifier questions.protected convert in which modifier.
+
+Package access question means scope of packages.
+
+Thread safety in java.
+
+Session time out qustions.
+
+How to define entry point in manifest file in JAR.
+
+Process thread rules and difference. Thread definition.
+
+Java -exe command , java - jar jarfile command.
+
+Java program internal working.
+
+Exception concept
+
+
+VC ERP
+
+VC ERP
+---------
+
+Try catch
+Only try without catch
+Try catch and finally all with return 1,2,3
+Errors can be caught ? If not what's the flow ?
+Runtime and compiletime exceptions
+How to handle errors ?
+
+OOPs concept all with explanations
+DI
+and
+AOP
+
+Why data hiding setter and getter methods better than class variables
+
+final methods in both child and parent
+
+Access different value with same hashcode from map
+
+Diff between map implementing classes
+Collection vs Collections
+
+Abstract class vs interface
+Construcotr chaining
+
+Comparable vs comparator
+Necessary to implement comparable
+
+
+
+IBM Qs
+
+IBM QS
+----------
+
+Tell me about your project.
+When to use primary data types and wrapper data type?
+String s = new Object() valid ?
+HashMap vs ConcurrentHashMap
+StringBuffer vs StringBuilder
+ArayList methods
+Object class methods
+Abstract class questions
+Immutability questions
+How to make your own immutable class
+How to make list synchronized
+Multiple inheritance java. Why it doesn't support it even its an OOP.
+
+Pruthvi interviews
+
+Amdocs
+
+String rotation
+Why React
+How jQuery works
+SVN vs GitHub
+To people working on same method and one commit what about second one - SVN
+Rest vs soap
+Design pattern
+
+Eclinical
+
+Test
+
+Design pattern
+Singleton class
+Abstract method and class examples - like what will be the output
+Call static method before static block - ans static variable
+Map output with 2 null keys
+Hashset and treeset different
+
+Defined oop concept - real time - non technical lang
+How to put object as a key in map example
+Program to count number of occurrence of numbers in list.
+
+How to load predefined values once from database - ans use class level variable
+Send mail after login without delay in redirection - ans servlet context listener
+Program for Factorial
+
+
+Sanni Qs
+
+Sanni Qs
+-----------
+
+Which technology are using at UI side?
+Describe flow of ur current project.
+Describe architecture of your current project.
+What is mvc in string?
+Which part of spring u are currently using in your project?
+What is dependency injection in string?
+What is design pattern?
+What is entry in java?
+Write the flow to iterate value from map using Iterator.
+Why should I use Iterator to iterate from map instead foreach?
+What is different between hashtable and hasmap?
+What is concurrenthashmap?
+Difference between concurrenthashmap and hashtable?
+Difference between arraylist and linkedlist?
+Which would better if I want to remove random element from linkedlist and arraylist?
+What is runtime exception and what is compiletime exception? Write the program for each to handle.
+What is custom exception ? Write code to write custom exception.
+What is abstraction and what is interface in java?
+When to use abstraction and when to use interface?
+What is difference between soap and rest?
+can I write constructor inside abstract class?
+Is Apache tomcat is webserver or application server?  If web then howand if application then how?
+what is jstl tag?
+Can I write my custom jstl tag? Yes then can you write down one custom jstl tag mean what should I do to write custom jstl tag?
+What is scriplet in jsp?
+Why should I avoid to write it inside jsp?  What should happen after compilation of scriplet code in jsp page?
+What is life cycle of jsp?
+If I am using override method and if I am using it with exception but in that case if I am giving exception in base class's method but not in child class's method?
+Then what happen ?
+
+At that time if you are giving unchecked exception then it will not throw exception but if you are using checked exception at that time compiler will throw exception.
+
+What happen if I am giving asing Id and name with the same value to Employee bean class  and add it Set?
+
+Is it will be addable or not?
+
+Why should I use spring framework but not spring?
+
+What happen it I am making one final variable with value 15 and access it using value 10 and againg try to change the value of that variable with the other object of same class?
+
+And what if same thing will be happen with giving static as well with final?
+
+Can I use constructor inside abstract class? Why?
+
+What is immutable in java? Which java class is immutable in java except string?
+
+Is class will be compile if I will write override method in base class with return type int and in child class with return type Wrapper class Integer?
+
+What is difference between set and List
+What is inner implement of set method
+
+PS: please also see internal implementation of add method of string.
+
+Final finally and finalize
+
+Method overloading method overriding.
+
+howmany null values are allowed by hashmap?
+Threads start process,
+
+IO concepts right syntax
+
+Jar file initialization
+
+Jar file execution without using external call
+
+One transaction regarding questions, transaction Attribute Type questions.valid transaction in EE.
+
+When Heap memory leakage in java program.
+
+When deadlock occurs?
+
+Threads state when come in picture
+
+Object referance equal and == method
+
+String comparison method
+
+Strings all methods deep concept
+When string comparisopn gives true using matcher equal and ==
+
+Solution to avoid memory leak
+
+Jar Deployment regarding questions.
+
+File delete, file replace concept
+
+String mutable immutable concept
+
+String heap question.
+
+Find program bug and have to need immediate solution.
+
+Inheritance , interface rules concept.
+
+Method overloading overriding concept.
+
+This() super() concept.
+
+Constructor calling concept.
+
+volatile transient synchronized keyword concept.
+
+Inserion order in collection using set.
+
+Bug finding problem.
+
+Output for given program.
+
+Which Method call using which object call.
+
+Inner class outer class variable access rules.
+
+Generic class calling question , 2 questions.
+
+Jsp object method questions.
+
+Jsp object method Deep question.
+
+Servlet questions. How to compile jsp pages.
+
+Stringbuffer stringbuffer concept and methods.
+
+Multithread question.
+
+@annotation while using method overriding.
+
+Public static projected modifier questions.protected convert in which modifier.
+
+Package access question means scope of packages.
+
+Thread safety in java.
+
+Session time out qustions.
+
+How to define entry point in manifest file in JAR.
+
+Process thread rules and difference. Thread definition.
+
+Java -exe command , java - jar jarfile command.
+
+Java program internal working.
+
+Exception concept
+
+VC ERP
+
+VC ERP
+---------
+
+Try catch
+Only try without catch
+Try catch and finally all with return 1,2,3
+Errors can be caught ? If not what's the flow ?
+Runtime and compiletime exceptions
+How to handle errors ?
+
+OOPs concept all with explanations
+DI
+and
+AOP
+
+Why data hiding setter and getter methods better than class variables
+
+final methods in both child and parent
+
+Access different value with same hashcode from map
+
+Diff between map implementing classes
+Collection vs Collections
+
+Abstract class vs interface
+Construcotr chaining
+
+Comparable vs comparator
+Necessary to implement comparable
+
+
+Virtusa via evoke HR
+
+
+
+• Questions asked for client interview - citi bank
+
+Round - 1
+----------------
+
+Write Login flow with spring framework
+
+Round - 2
+-----------------
+
+- SerialVersionUID compulsory via serialazation?
+Internally jvm creates it?
+
+- What is volatile?
+
+- What is transient?
+
+- What values you don't want to serialize ?
+
+- What is callable ?
+
+- Difference callable vs runnable
+
+- What is executor framework?
+
+- Difference between wait and sleep
+
+- Where do you find the notify, wait and notifyall methods? Why these methods are in Object class?
+
+- How synchronized method works?
+Static synchronized and instance synchronized methods?
+- Can multiple threads have simultaneous access of both methods?
+
+- What is ConcurrentHashMap?
+
+- How many threads can work on a concurrenthashmap
+
+- What is failfast?
+
+- What is the contract between equals and hashcode?
+
+- parent class method throws IOEXCEPTION.
+child class overridden method throws EXCEPTION.
+- Is the above scenario valid? Will it still override?
+- Will it give run time or compile time error or no error?
+
+- can we throw compile time exceptions?
+
+Set s = new HashSet()
+s.add(new String("123"));
+s.add(new Integer(1));
+
+Is above thing possible in set?
+- What if we use tree set? Is above insertion possible?
+
+- Set s = new HashSet();
+s.add(new String("123"));
+s.add("123");
+s.size(); ?
+
+s.add(new Employee("123"));
+s.add(new Employee("123"));
+s.size(); ?
+
+- what is comparable and comprator ? When to use them ?
+
+- what is generics?
+- what are different usages of it?
+
+
+
+
+
+Java 8
+------------
+
+- What are the new features?
+
+- What is lambda expression?
+
+Logical
+------------
+
+- If a clock shows 3:30. What is the angle between hour and minute hand?
+
+- A list contains random numeric numbers upto 1 lakh values - you need to give a numeric number - find the closest numeric number to the given number?
+
+- I want to count occurrence of each word in your resume. How efficiently it can be done?
+
+Spring & Hibernate
+-------------------------------
+
+- What annotations of spring you know?
+
+- What is @service
+
+- What are the annotations in Spring Rest API?
+
+- different methods of SPRING WITH REST
+Difference bw post and put
+
+- Which jar you use for accessing rest api?
+
+- Bean scopes explain
+
+- Different types of cache in hibernate?
+
+- Different types of queries supported in hibernate?
+
+- Different APIs used with hibernate.
+
+- Explain annotations used with hibernate.
+
+- Difference bw get and load method.
+
+- What is dynamic query in hibernate?
+
+- What are different types of mappings in hibernate?
+
+- what are the different hibernate states ?
+
+
+#Java_Lovers : 125 Basic Core Java Iinterview Questions.!
+
+What is the  feature of Java?
+
+Java is a platform independent language.
+
+What is mean by platform independence?
+
+Platform independence means that we can write and compile the
+java code in one platform (eg Windows) and can execute the
+class in any other supported platform eg (Linux,Solaris,etc).
+
+Are JVM’s platform independent?
+
+JVM’s are not platform independent. JVM’s are platform specific run time implementation provided by the vendor.
+
+What is a JVM?
+JVM is Java Virtual Machine which is a run time environment for the compiled java class files.
+
+What is the difference between a JDK and a JVM?
+JDK is Java Development Kit which is for development purpose and it includes execution environment also. But JVM is purely a run time environment and hence you will not be able to compile your source files using a JVM.
+
+What is a pointer and does Java support pointers?
+Pointer is a reference handle to a memory location. Improper handling of pointers leads to memory leaks and reliability issues hence Java doesn’t support the usage of pointers.
+
+What is the base class of all classes?
+java.lang.Object
+
+Does Java support multiple inheritance?
+Java doesn’t support multiple inheritance.
+
+Is Java a pure object oriented language?
+Java uses primitive data types and hence is not a pure object oriented language.
+
+Are arrays primitive data types?
+In Java, Arrays are objects.
+
+What is difference between Path and Classpath?
+Path and Classpath are operating system level environment variales. Path is used define where the system can find the executables(.exe) files and classpath is used to specify the location .class files.
+
+What are local variables?
+Local varaiables are those which are declared within a block of code like methods. Local variables should be initialised before accessing them.
+
+What are instance variables?
+Instance variables are those which are defined at the class level. Instance variables need not be initialized before using them as they are automatically initialized to their default values.
+
+How to define a constant variable in Java?
+The variable should be declared as static and final. So only one copy of the variable exists for all instances of the class and the value can’t be changed also.
+static final int PI = 2.14; is an example for constant.
+
+Should a main method be compulsorily declared in all java classes?
+No not required. main method should be defined only if the source class is a java application.
+
+What is the return type of the main method?
+Main method doesn’t return anything hence declared void.
+
+Why is the main method declared static?
+main method is called by the JVM even before the instantiation of the class hence it is declared as static.
+
+What is the arguement of main method?
+main method accepts an array of String object as arguement.
+
+Can a main method be overloaded?
+Yes. You can have any number of main methods with different method signature and implementation in the class.
+
+Can a main method be declared final?
+Yes. Any inheriting class will not be able to have it’s own default main method.
+
+Does the order of public and static declaration matter in main method?
+No it doesn’t matter but void should always come before main().
+Can a source file contain more than one Class declaration?
+Yes a single source file can contain any number of Class declarations but only one of the class can be declared as public.
+
+What is a package?
+Package is a collection of related classes and interfaces. package declaration should be first statement in a java class.
+
+Which package is imported by default?
+java.lang package is imported by default even without a package declaration.
+
+Can a class declared as private be accessed outside it’s package?
+Not possible.
+Can a class be declared as protected?
+A class can’t be declared as protected. only methods can be declared as protected.
+
+What is the access scope of a protected method?
+A protected method can be accessed by the classes within the same package or by the subclasses of the class in any package.
+What is the purpose of declaring a variable as final?
+A final variable’s value can’t be changed. final variables should be initialized before using them.
+
+What is the impact of declaring a method as final?
+A method declared as final can’t be overridden. A sub-class can’t have the same method signature with a different implementation.
+I don’t want my class to be inherited by any other class. What should i do?
+You should declared your class as final. But you can’t define your class as final, if it is an abstract class. A class declared as final can’t be extended by any other class.
+
+Can you give few examples of final classes defined in Java API?
+java.lang.String,java.lang.Math are final classes.
+
+How is final different from finally and finalize?
+final is a modifier which can be applied to a class or a method or a variable. final class can’t be inherited, final method can’t be overridden and final variable can’t be changed.
+finally is an exception handling code section which gets executed whether an exception is raised or not by the try block code segment.
+finalize() is a method of Object class which will be executed by the JVM just before garbage collecting object to give a final chance for resource releasing activity.
+
+Can a class be declared as static?
+No a class cannot be defined as static. Only a method,a variable or a block of code can be declared as static.
+
+When will you define a method as static?
+When a method needs to be accessed even before the creation of the object of the class then we should declare the method as static.
+
+What are the restriction imposed on a static method or a static block of code?
+A static method should not refer to instance variables without creating an instance and cannot use “this” operator to refer the instance.
+
+I want to print “Hello” even before main is executed. How will you acheive that?
+Print the statement inside a static block of code. Static blocks get executed when the class gets loaded into the memory and even before the creation of an object. Hence it will be executed before the main method. And it will be executed only once.
+
+What is the importance of static variable?
+static variables are class level variables where all objects of the class refer to the same variable. If one object changes the value then the change gets reflected in all the objects.
+
+Can we declare a static variable inside a method?
+Static varaibles are class level variables and they can’t be declared inside a method. If declared, the class will not compile.
+
+What is an Abstract Class and what is it’s purpose?
+A Class which doesn’t provide complete implementation is defined as an abstract class. Abstract classes enforce abstraction.
+
+Can a abstract class be declared final?
+Not possible. An abstract class without being inherited is of no use and hence will result in compile time error.
+
+What is use of a abstract variable?
+Variables can’t be declared as abstract. only classes and methods can be declared as abstract.
+
+Can you create an object of an abstract class?
+Not possible. Abstract classes can’t be instantiated.
+
+Can a abstract class be defined without any abstract methods?
+Yes it’s possible. This is basically to avoid instance creation of the class.
+
+Class C implements Interface I containing method m1 and m2 declarations. Class C has provided implementation for method m2. Can i create an object of Class C?
+No not possible. Class C should provide implementation for all the methods in the Interface I. Since Class C didn’t provide implementation for m1 method, it has to be declared as abstract. Abstract classes can’t be instantiated.
+Can a method inside a Interface be declared as final?
+No not possible. Doing so will result in compilation error. public and abstract are the only applicable modifiers for method declaration in an interface.
+
+Can an Interface implement another Interface?
+Intefaces doesn’t provide implementation hence a interface cannot implement another interface.
+
+Can an Interface extend another Interface?
+Yes an Interface can inherit another Interface, for that matter an Interface can extend more than one Interface.
+
+Can a Class extend more than one Class?
+Not possible. A Class can extend only one class but can implement any number of Interfaces.
+Why is an Interface be able to extend more than one Interface but
+
+a Class can’t extend more than one Class?
+Basically Java doesn’t allow multiple inheritance, so a Class is restricted to extend only one Class. But an Interface is a pure abstraction model and doesn’t have inheritance hierarchy like classes(do remember that the base class of all classes is Object). So an Interface is allowed to extend more than one Interface.
+
+Can an Interface be final?
+Not possible. Doing so so will result in compilation error.
+
+Can a class be defined inside an Interface?
+Yes it’s possible.
+Can an Interface be defined inside a class?
+Yes it’s possible.
+
+What is a Marker Interface?
+An Interface which doesn’t have any declaration inside but still enforces a mechanism.
+
+Which OO Concept is achieved by using overloading and overriding?
+Polymorphism.
+
+If i only change the return type, does the method become overloaded?
+No it doesn’t. There should be a change in method arguements for a method to be overloaded.
+
+Why does Java not support operator overloading?
+Operator overloading makes the code very difficult to read and maintain. To maintain code simplicity, Java doesn’t support operator overloading.
+
+Can we define private and protected modifiers for variables in interfaces?
+No
+
+What is Externalizable?
+Externalizable is an Interface that extends Serializable Interface. And sends data into Streams in Compressed Format. It has two methods, writeExternal(ObjectOuput out) and readExternal(ObjectInput in)
+
+What modifiers are allowed for methods in an Interface?
+Only public and abstract modifiers are allowed for methods in interfaces.
+
+What is a local, member and a class variable?
+Variables declared within a method are “local” variables. Variables declared within the class i.e not within any methods are “member” variables (global variables). Variables declared within the class i.e not within any methods and are defined as “static” are class variables
+
+What is an abstract method?
+An abstract method is a method whose implementation is deferred to a subclass.
+What value does read() return when it has reached the end of a file?
+The read() method returns -1 when it has reached the end of a file.
+Can a Byte object be cast to a double value?
+No, an object cannot be cast to a primitive value.
+
+What is the difference between a static and a non-static inner class?
+A non-static inner class may have object instances that are associated with instances of the class’s outer class. A static inner class does not have any object instances.
+What is an object’s lock and which object’s have locks?
+An object’s lock is a mechanism that is used by multiple threads to obtain synchronized access to the object. A thread may execute a synchronized method of an object only after it has acquired the object’s lock. All objects and classes have locks. A class’s lock is acquired on the class’s Class object.
+
+What is the % operator?
+It is referred to as the modulo or remainder operator. It returns the remainder of dividing the first operand by the second operand.
+When can an object reference be cast to an interface reference?
+An object reference be cast to an interface reference when the object implements the referenced interface.
+Which class is extended by all other classes?
+The Object class is extended by all other classes.
+
+Which non-Unicode letter characters may be used as the first character of an identifier?
+The non-Unicode letter characters $ and _ may appear as the first character of an identifier
+What restrictions are placed on method overloading?
+Two methods may not have the same name and argument list but different return types.
+
+What is casting?
+There are two types of casting, casting between primitive numeric types and casting between object references. Casting between numeric types is used to convert larger values, such as double values, to smaller values, such as byte values. Casting between object references is used to refer to an object by a compatible class, interface, or array type reference.
+What is the return type of a program’s main() method?
+void.
+
+If a variable is declared as private, where may the variable be accessed?
+A private variable may only be accessed within the class in which it is declared.
+What do you understand by private, protected and public?
+These are accessibility modifiers. Private is the most restrictive, while public is the least restrictive. There is no real difference between protected and the default type (also known as package protected) within the context of the same package, however the protected keyword allows visibility to a derived class in a different package.
+
+What is Downcasting ?
+Downcasting is the casting from a general to a more specific type, i.e. casting down the hierarchy
+What modifiers may be used with an inner class that is a member of an outer class?
+A (non-local) inner class may be declared as public, protected, private, static, final, or abstract.
+
+How many bits are used to represent Unicode, ASCII, UTF-16, and UTF-8 characters?
+Unicode requires 16 bits and ASCII require 7 bits. Although the ASCII character set uses only 7 bits, it is usually represented as 8 bits. UTF-8 represents characters using 8, 16, and 18 bit patterns. UTF-16 uses 16-bit and larger bit patterns.
+
+What restrictions are placed on the location of a package statement within a source code file?
+A package statement must appear as the first line in a source code file (excluding blank lines and comments).
+What is a native method?
+A native method is a method that is implemented in a language other than Java.
+
+What are order of precedence and associativity, and how are they used?
+Order of precedence determines the order in which operators are evaluated in expressions. Associatity determines whether an expression is evaluated left-to-right or right-to-left
+Can an anonymous class be declared as implementing an interface and extending a class?
+An anonymous class may implement an interface or extend a superclass, but may not be declared to do both.
+What is the range of the char type?
+The range of the char type is 0 to 2^16 – 1.
+What is the range of the short type?
+The range of the short type is -(2^15) to 2^15 – 1.
+
+Why isn’t there operator overloading?
+Because C++ has proven by example that operator overloading makes code almost impossible to maintain.
+What does it mean that a method or field is “static”?
+Static variables and methods are instantiated only once per class. In other words they are class variables, not instance variables. If you change the value of a static variable in a particular object, the value of that variable changes for all instances of that class. Static methods can be referenced with the name of the class rather than the name of a particular object of the class (though that works too). That’s how library methods like System.out.println()
+work. out is a static field in the java.lang.System class.
+
+Is null a keyword?
+The null value is not a keyword.
+Which characters may be used as the second character of an identifier,but not as the first character of an identifier?
+The digits 0 through 9 may not be used as the first character of an identifier but they may be used after the first character of an identifier.
+Is the ternary operator written x : y ? z or x ? y : z ?
+It is written x ? y : z.
+
+How is rounding performed under integer division?
+The fractional part of the result is truncated. This is known as rounding toward zero.
+If a class is declared without any access modifiers, where may the class be accessed?
+A class that is declared without any access modifiers is said to have package access. This means that the class can only be accessed by other classes and interfaces that are defined within the same package.
+
+Does a class inherit the constructors of its superclass?
+A class does not inherit constructors from any of its superclasses.
+Name the eight primitive Java types.
+The eight primitive types are byte, char, short, int, long, float, double, and boolean.
+
+What restrictions are placed on the values of each case of a switch statement?
+During compilation, the values of each case of a switch statement must evaluate to a value that can be promoted to an int value.
+
+What is the difference between a while statement and a do statement?
+A while statement checks at the beginning of a loop to see whether the next loop iteration should occur. A do statement checks at the end of a loop to see whether the next iteration of a loop should occur. The do statement will always execute the body of a loop at least once.
+
+What modifiers can be used with a local inner class?
+A local inner class may be final or abstract.
+When does the compiler supply a default constructor for a class?
+The compiler supplies a default constructor for a class if no other constructors are provided.
+
+If a method is declared as protected, where may the method be accessed?
+A protected method may only be accessed by classes or interfaces of the same package or by subclasses of the class in which it is declared.
+
+What are the legal operands of the instanceof operator?
+The left operand is an object reference or null value and the right operand is a class, interface, or array type.
+
+Are true and false keywords?
+The values true and false are not keywords.
+
+100.What happens when you add a double value to a String?
+The result is a String object.
+
+101.What is the diffrence between inner class and nested class?
+When a class is defined within a scope od another class, then it becomes inner class. If the access modifier of the inner class is static, then it becomes nested class.
+
+102.Can an abstract class be final?
+An abstract class may not be declared as final
+
+103.What is numeric promotion?
+Numeric promotion is the conversion of a smaller numeric type to a larger numeric type, so that integer and floating-point operations may take place. In numerical promotion, byte, char, and short values are converted to int values. The int values are also converted to long values, if necessary. The long and float values are converted to double values, as required
+
+104.What is the difference between a public and a non-public class?
+A public class may be accessed outside of its package. A non-public class may not be accessed outside of its package.
+
+105.To what value is a variable of the boolean type automatically initialized?
+The default value of the boolean type is false
+
+106.What is the difference between the prefix and postfix forms of the ++ operator?
+The prefix form performs the increment operation and returns the value of the increment operation. The postfix form returns the current value all of the expression and then performs the increment operation on that value.
+
+107.What restrictions are placed on method overriding?
+Overridden methods must have the same name, argument list, and return type. The overriding method may not limit the access of the method it overrides. The overriding method may not throw any exceptions that may not be thrown by the overridden method.
+
+108.What is a Java package and how is it used?
+A Java package is a naming context for classes and interfaces. A package is used to create a separate name space for groups of classes and interfaces. Packages are also used to organize related classes and interfaces into a single API unit and to control accessibility to these classes and interfaces.
+
+109.What modifiers may be used with a top-level class?
+A top-level class may be public, abstract, or final.
+
+110.What is the difference between an if statement and a switch statement?
+The if statement is used to select among two alternative
+
+
+
+

@@ -1,10 +1,13 @@
 package com.example.commonresponse;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.validation.Valid;
 
 @Component
+@Scope(WebApplicationContext.SCOPE_REQUEST)
 public class SuccessFullResponse<T>{
     private String code;
     private String status;

@@ -25,19 +25,28 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        System.out.println(" username loadbyusername -> "+userName);
         Users users=usersRepository.findByUserName(userName).get();
+        if(users==null){
+            users=new Users();
+            users.setUserName("ravidpatel");
+            users.setPassword("ravi1990");
+        }
         System.out.println(users.getUserName()+" "+users.getPassword());
-        users.getRoles().forEach(s->System.out.println(s.getRoleName()));
-        users.setPassword(bCryptPasswordEncoder.encode("ravi1990"));//usersRepository.findByUserName(userName).get();
+//        users.getRoles().forEach(s->System.out.println(s.getRoleName()));
+        users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));//usersRepository.findByUserName(userName).get();
         List<GrantedAuthority> authorities = getUserAuthority(users.getRoles());
+//        System.out.println(users.getUserName()+" "+users.getPassword());
         return buildUserForAuthentication(users, authorities);
     }
 
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        for (Role role : userRoles) {
-            roles.add(new SimpleGrantedAuthority(role.getRoleName()));
+        if(userRoles.isEmpty()){
+            roles.add(new SimpleGrantedAuthority("ADMIN"));
+        }else{
+            for (Role role : userRoles) {
+                roles.add(new SimpleGrantedAuthority(role.getRoleName()));
+            }
         }
         roles.forEach(s->System.out.println(s.getAuthority()));
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);

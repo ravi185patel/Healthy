@@ -1,20 +1,28 @@
 package com.example.config;
 
+import com.example.interceptorwithfilter.LoggerInterceptor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class ExternalConfig {
+public class ExternalConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoggerInterceptor());
+//    }
 
     @Bean
     public WebMvcConfigurer corsConfigurer()

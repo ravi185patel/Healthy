@@ -6,7 +6,7 @@ import com.example.service.ServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.inject.Provider;
 import javax.validation.Valid;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ public class AdminController {
     private ServiceI<PatientModel, PatientModel> patientService;
 
     @Autowired
-    private CommonResponse commonResponse;
+    private Provider<CommonResponse> commonResponseProvider;
 
     @ApiOperation(value = "Get list of Students in the System ", response = Iterable.class, tags = "getStudents")
     @ApiResponses(value = {
@@ -37,17 +37,17 @@ public class AdminController {
 
     @GetMapping("/patients")
     public ResponseEntity<Object> getAllPatient(){
-        return commonResponse.getSuccessFullResponse(patientService.getAll(),true);
+        return commonResponseProvider.get().getSuccessFullResponse(patientService.getAll(),true);
     }
 
     @GetMapping("/patients/{id}")
     public ResponseEntity<Object> getPatient(@PathVariable Long id){
-        return commonResponse.getSuccessFullResponse(patientService.get(id),true);
+        return commonResponseProvider.get().getSuccessFullResponse(patientService.get(id),true);
     }
 
     @PostMapping("/patients")
     public ResponseEntity<Object> addPatients(@Valid  @RequestBody PatientModel patientModel){
-        return commonResponse.getSuccessFullResponse(patientService.add(patientModel),true);
+        return commonResponseProvider.get().getSuccessFullResponse(patientService.add(patientModel),true);
     }
 
 }

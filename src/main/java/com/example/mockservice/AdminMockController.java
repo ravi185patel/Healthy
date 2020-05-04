@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Provider;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ import java.util.List;
 public class AdminMockController {
 
     @Autowired
-    private CommonResponse commonResponse;
+    private Provider<CommonResponse> commonResponseProvider;
 
     @Autowired
     private PatientMapper patientMapper;
@@ -29,7 +30,7 @@ public class AdminMockController {
 
     @GetMapping("/patients")
     public ResponseEntity<Object> getAllPatient(){
-        return commonResponse.getSuccessFullResponse(AdminMockService.getAllPatient(),true);
+        return commonResponseProvider.get().getSuccessFullResponse(AdminMockService.getAllPatient(),true);
     }
 
     @GetMapping("/patients/{id}")

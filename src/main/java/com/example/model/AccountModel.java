@@ -10,6 +10,7 @@ import com.example.entity.Users;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -23,7 +24,8 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class AccountModel {
+@JsonRootName(value = "account")
+public class AccountModel implements  Serializable{
 
     @JsonProperty("account_id")
     private Long id;

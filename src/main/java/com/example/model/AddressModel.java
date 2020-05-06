@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Component
 @JsonRootName("address")
-public class AddressModel {
+public class AddressModel implements Serializable {
 
     private Long addressId;
 

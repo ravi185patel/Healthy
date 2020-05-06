@@ -2,16 +2,21 @@ package com.example.mockservice;
 
 import com.example.commonresponse.CommonResponse;
 import com.example.commonresponse.SuccessFullResponse;
+import com.example.entity.Account;
 import com.example.entity.Doctor;
 import com.example.entity.Patient;
 import com.example.entity.Users;
 import com.example.mapperImp.PatientMapper;
+import com.example.model.AccountModel;
+import com.example.model.DoctorModel;
 import com.example.model.PatientModel;
+import com.example.model.UsersModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Provider;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -40,6 +45,7 @@ public class AdminMockController {
 //        AdminMockService.print(successFullResponse);
 //        adminMockService.addData();
     }
+
     @GetMapping("/users/{id}")
     public Users getUser(@PathVariable Long id){
 //        AdminMockService.printEntity(patient);
@@ -78,5 +84,29 @@ public class AdminMockController {
         AdminMockService.printEntity(patientMapper.modelLstToEntityLst(successFullResponse.getData()));
         AdminMockService.print(successFullResponse);
     }
+
+    @GetMapping("/users")
+    public List<UsersModel> getUsers(){
+        return null;
+    }
+
+    @GetMapping("/accounts")
+    public  ResponseEntity<Object> getAccounts() throws IOException {
+//        ResponseEntity<Object>
+        System.out.println(" called admin mock service ");
+//        return adminMockService.getAllAccount();
+        return commonResponseProvider.get().getSuccessFullResponse(adminMockService.getAllAccount(),true);
+    }
+
+//    @GetMapping("/patients")
+//    public List<PatientModel> getPatients(){
+//        return null;
+//    }
+
+    @GetMapping("/Doctors")
+    public List<DoctorModel> getDoctors(){
+        return null;
+    }
+
 }
 

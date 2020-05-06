@@ -1,23 +1,20 @@
 package com.example.mockservice;
 
-import com.example.commonresponse.SuccessFullResponse;
-import com.example.dao.PatientDao;
 import com.example.entity.*;
-import com.example.model.AddressModel;
-import com.example.model.DoctorModel;
-import com.example.model.PatientModel;
+import com.example.model.*;
 import com.example.repository.AccountRepository;
 import com.example.repository.Dao;
 import com.example.repository.UsersRepository;
-import jdk.nashorn.internal.runtime.options.Option;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.print.Doc;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
 @Component
 public class AdminMockService {
@@ -34,7 +31,6 @@ public class AdminMockService {
     @Autowired
     private AccountRepository accountRepository;
 
-
     public Patient addPatient(Patient patient){
         return patientDao.save(patient);
     }
@@ -46,6 +42,7 @@ public class AdminMockService {
     public Users addUser(Users user){
         return usersRepository.save(user);
     }
+
     public Patient getPatient(Long id){
         return patientDao.find(id);
     }
@@ -53,13 +50,15 @@ public class AdminMockService {
     public Users getUser(Long id){
         Optional<Users> op=usersRepository.findById(id);
         System.out.println(op.isPresent()+" is present or not ");
-        return op.get();
+        return op.isPresent() ? op.get():null;
     }
+
     public Account getAccount(Long id){
         Optional<Account> op=accountRepository.findById(id);
         System.out.println(op.isPresent()+" is present or not ");
-        return op.get();
+        return op.isPresent() ? op.get():null;
     }
+
     public static void print(Object data){
 //        SuccessFullResponse successFullResponse=(SuccessFullResponse) data;
 //        Object dataObj=successFullResponse.getData();
@@ -81,8 +80,9 @@ public class AdminMockService {
 //            }
 //        }
     }
+
     public static List<PatientModel> getAllPatient(){
-        List<PatientModel> patientModelList=new ArrayList<>();
+//        List<PatientModel> patientModelList=new ArrayList<>();
 //        for(int i=0;i<10;i++){
 //            PatientModel patientModel=new PatientModel();
 //            patientModel.setId(Long.valueOf(i));
@@ -105,7 +105,7 @@ public class AdminMockService {
 //            patientModel.setAddressList(addressModelList);
 //            patientModelList.add(patientModel);
 //        }
-        return patientModelList;
+        return null;
     }
 
     public static void printEntity(Object data){
@@ -130,6 +130,7 @@ public class AdminMockService {
 
         }
     }
+
     public List<DoctorModel> getAllDocs(){
        return null;
     }
@@ -151,5 +152,47 @@ public class AdminMockService {
 //        p.setPerson(person);
         patientDao.save(p);
 
+    }
+
+    @ExceptionHandler(FileNotFoundException.class)
+    public List<Account> getAllAccount() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Account> accountList =accountRepository.findAll();
+//                try{
+////                    accountModelList=mapper.readValue(new File("C:\\Users\\RAVI\\IdeaProjects\\springhibernateangular\\src\\main\\java\\com\\example\\jsonfiles\\accoutns.json"), new TypeReference<List<AccountModel>>(){});
+//                    accountModelList.add(mapper.readValue(new File("C:\\Users\\RAVI\\IdeaProjects\\springhibernateangular\\src\\main\\java\\com\\example\\jsonfiles\\accoutns.json"), AccountModel.class));
+//                }catch (IOException e){
+//                     throw e;
+//                }
+/*
+        List<AccountModel> accountModelList=new ArrayList<>();
+        for(int i=0;i<2;i++){
+            AccountModel accountModel=new AccountModel();
+//            accountMode.
+            List<AddressModel> addressModelList=new ArrayList<>();
+            for(int j=0;j<4;j++){
+                AddressModel addressModel=new AddressModel();
+                addressModel.setAddressId(Long.valueOf(j));
+                addressModel.setAddressLine1("house "+j+","+i);
+                addressModel.setAddressLine2("sai park "+j+","+i);
+                addressModel.setStreet("tulsivan "+j+","+i);
+                addressModel.setCity("valsad "+j+","+i);
+                addressModel.setState("valsad "+j+","+i);
+                addressModel.setCountry("india "+j+","+i);
+                addressModelList.add(addressModel);
+            }
+            accountModel.setAddressList(addressModelList);
+            UsersModel usersModel=new UsersModel();
+            Set<RoleModel> roleModelSet=new HashSet<>();
+            RoleModel roleModel=new RoleModel();
+            roleModel.setId(1l);
+            roleModel.setRoleName("ADMIN");
+            roleModelSet.add(roleModel);
+            usersModel.setRoles(roleModelSet);
+            accountModel.setUser(usersModel);
+            accountModelList.add(accountModel);
+        }
+        System.out.println(accountModelList.size());*/
+        return accountList;
     }
 }

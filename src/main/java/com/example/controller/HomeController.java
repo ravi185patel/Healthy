@@ -19,7 +19,7 @@ public class HomeController {
         return "Hello world";
     }
 
-    @GetMapping(value = "/private")
+    @GetMapping(value = "/api/private")
     public String privateArea(){
         return "Private area";
     }

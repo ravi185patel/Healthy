@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Component
-public class UsersModel {
+public class UsersModel implements  Serializable{
 
     private Long id;
 

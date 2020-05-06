@@ -24,7 +24,7 @@ public class AdminController {
     @Autowired
     private Provider<CommonResponse> commonResponseProvider;
 
-    @ApiOperation(value = "Get list of Students in the System ", response = Iterable.class, tags = "getStudents")
+    @ApiOperation(value = "Get list of Student in the System ", response = Iterable.class, tags = "getStudents")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Suceess|OK"),
             @ApiResponse(code = 401, message = "not authorized!"),

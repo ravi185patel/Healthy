@@ -1,17 +1,48 @@
 package com.example.controller;
 
+import com.example.commonresponse.CommonResponse;
+import com.example.entity.Users;
+import com.example.model.PatientModel;
+import com.example.model.UsersModel;
+import com.example.service.ServiceI;
+import com.example.service.UsersServiceI;
+import com.example.serviceImp.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Provider;
+import javax.validation.Valid;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 
+    @Autowired
+    private UsersServiceI<UsersModel> userSerivce;
+
+    @Autowired
+    private Provider<CommonResponse> commonResponseProvider;
+
     @GetMapping("/api/login")
-    public UserDetails successfullLogin(@AuthenticationPrincipal final UserDetails userDetails){
-        return userDetails;
+    public ResponseEntity<Object> successfullLogin(@AuthenticationPrincipal final UserDetails userDetails){
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (principal instanceof UserDetails) {
+//            return ((UserDetails)principal);
+//        } else {
+//            return null;
+//        }
+        UsersModel user=userSerivce.get(userDetails.getUsername());
+        user.setPassword(null);
+        return commonResponseProvider.get().getSuccessFullResponse(user,true);
+//        return userDetails;
+    }
+
+    @PostMapping("/api/register")
+    public ResponseEntity<Object> registerUser(@Valid @RequestBody UsersModel userModel){
+        return commonResponseProvider.get().getSuccessFullResponse(userSerivce.add(userModel),true);
     }
 }

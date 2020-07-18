@@ -6,6 +6,7 @@ import com.example.model.AccountModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
@@ -42,5 +43,10 @@ public class AccountMapper implements MapperInterface<AccountModel, Account> {
         Type listType = new TypeToken<Collection<AccountModel>>(){}.getType();
         List<AccountModel> AccountModelList = modelMapper.map(r,listType);
         return AccountModelList;
+    }
+
+    @Override
+    public Page<AccountModel> entityToModel(Page<Account> r) {
+        return null;
     }
 }

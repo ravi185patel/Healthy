@@ -8,10 +8,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Component
-@JsonRootName("address")
 public class AddressModel implements Serializable {
-
-    private Long addressId;
 
     @Size(min=5,max = 10,message = "Address length should be between 5 to 10")
     @NotNull(message = "Please provide address")
@@ -40,15 +37,6 @@ public class AddressModel implements Serializable {
     @Size(min=5,max = 5,message = "Pincode length should be between 5 to 10")
     @NotNull(message = "Please provide pincode")
     private String pinCode;
-
-
-    public Long getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
-    }
 
     public String getAddressLine1() {
         return addressLine1;

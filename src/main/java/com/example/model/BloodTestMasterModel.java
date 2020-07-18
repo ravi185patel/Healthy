@@ -1,20 +1,30 @@
-package com.example.entity;
+package com.example.model;
+
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-public class BloodTestMaster implements Serializable {
+@Component
+public class BloodTestMasterModel implements Serializable {
 
-    @Id
     private Long id;
+    private List<BloodTestDetailsModel> testDetailsList;
 
-    @OneToOne
-    private Test test;
+    public Long getId() {
+        return id;
+    }
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "btm_id")
-    private List<BloodTestDetails> testDetailsList;
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<BloodTestDetailsModel> getTestDetailsList() {
+        return testDetailsList;
+    }
+
+    public void setTestDetailsList(List<BloodTestDetailsModel> testDetailsList) {
+        this.testDetailsList = testDetailsList;
+    }
 }

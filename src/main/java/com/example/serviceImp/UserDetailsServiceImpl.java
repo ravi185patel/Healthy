@@ -1,8 +1,11 @@
 package com.example.serviceImp;
 
+import com.example.dao.UsersDao;
 import com.example.entity.Role;
 import com.example.entity.Users;
-import com.example.repository.UsersRepository;
+import com.example.mapper.MapperInterface;
+import com.example.model.UsersModel;
+import com.example.service.UsersServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,17 +18,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.*;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService , UsersServiceI<UsersModel> {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private MapperInterface<UsersModel, Users> usersMapper;
+
+    @Autowired
+    private UsersDao usersDao;
 
     @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Users users=usersRepository.findByUserName(userName).get();
+        Users users=usersDao.find(userName);
         if(users==null){
             users=new Users();
             users.setUserName("ravidpatel");
@@ -59,7 +65,39 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public boolean isUsernameAlreadyInUse(String username){
-        Optional<Users> users=usersRepository.findByUserName(username);
-        return users.isPresent();
+        return usersDao.isUsernameAlreadyInUse(username);
+    }
+
+    public boolean isEmailAlreadyInUse(String emaildId){
+        return usersDao.isEmailAlreadyInUse(emaildId);
+    }
+
+    public Users saveUser(Users user){
+        return usersDao.save(user);
+    }
+
+    @Override
+    public UsersModel add(UsersModel usersModel) {
+        return usersMapper.entityToModel(usersDao.save(usersMapper.modelToEntity(usersModel)));
+    }
+
+    @Override
+    public UsersModel update(UsersModel usersModel) {
+        return null;
+    }
+
+    @Override
+    public UsersModel get(Long id) {
+        return null;
+    }
+
+    @Override
+    public UsersModel get(String email) {
+        return usersMapper.entityToModel(usersDao.findByUserName(email));
+    }
+
+    @Override
+    public List<UsersModel> getAll() {
+        return null;
     }
 }

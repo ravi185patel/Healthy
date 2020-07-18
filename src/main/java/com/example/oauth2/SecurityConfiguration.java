@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-        @Autowired
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -47,8 +47,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/oauth/token").permitAll()
-                .antMatchers("/api/**").hasRole("ADMIN")
+                .antMatchers("/api/register").permitAll()
+                .antMatchers("/oauth/token","/","/home","/register","/login").permitAll()
+                .antMatchers("/api/login","/api/admin/**","/api/adminmock/**","/api/file/**").permitAll()//.hasRole("ADMIN")
+                .antMatchers("/api/doctor/**","/api/patient/**","/api/test/**","/api/file/**").permitAll()//.hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

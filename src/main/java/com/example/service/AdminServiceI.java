@@ -1,6 +1,6 @@
 package com.example.service;
 
-public interface AdminServiceI<T,R> extends ServiceI<T,R>{
+public interface AdminServiceI<T> extends ServiceI<T>{
 //    R add(T t);
     void delete(T t);
     void deleteById(Long id);

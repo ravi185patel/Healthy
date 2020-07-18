@@ -1,5 +1,5 @@
 package com.example.service;
 
-public interface DoctorSerivceI<T,R> extends ServiceI<T,R>{
+public interface DoctorSerivceI<T> extends ServiceI<T>{
     void deleteById(Long id);
 }

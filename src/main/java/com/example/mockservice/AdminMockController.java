@@ -41,7 +41,7 @@ public class AdminMockController {
     @GetMapping("/patients/{id}")
     public Patient getPatient(@PathVariable Long id){
 //        AdminMockService.printEntity(patient);
-        return adminMockService.getPatient(id);
+        return null;//adminMockService.getPatient(id);
 //        AdminMockService.print(successFullResponse);
 //        adminMockService.addData();
     }

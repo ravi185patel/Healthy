@@ -5,12 +5,8 @@ import sun.print.resources.serviceui_it;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@MappedSuperclass
 public class Address implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
 
     private String addressLine1;
     private String addressLine2;
@@ -19,14 +15,6 @@ public class Address implements Serializable {
     private String state;
     private String country;
     private String pinCode;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long addressId) {
-        this.id = id;
-    }
 
     public String getAddressLine1() {
         return addressLine1;

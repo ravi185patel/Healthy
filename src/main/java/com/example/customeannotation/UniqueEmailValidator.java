@@ -10,11 +10,11 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
     @Autowired
-    private AccountService accountService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value != null && !accountService.isEmailAlreadyInUse(value);
+        return value != null && !userDetailsService.isEmailAlreadyInUse(value);
     }
 
 }

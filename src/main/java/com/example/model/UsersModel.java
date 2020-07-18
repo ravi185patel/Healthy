@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.example.customeannotation.UniqueEmail;
 import com.example.customeannotation.UniqueUsername;
 import com.example.entity.Account;
 import com.example.entity.Role;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -33,7 +35,10 @@ public class UsersModel implements  Serializable{
     @Valid
     private Set<RoleModel> roles;
 
-    private AccountModel account;
+    @Email(message = "please provide valid email id")
+    @NotNull(message = "please provide emailid")
+    @UniqueEmail
+    private String email;
 
     public Long getId() {
         return id;
@@ -73,5 +78,13 @@ public class UsersModel implements  Serializable{
 
     public void setRoles(Set<RoleModel> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

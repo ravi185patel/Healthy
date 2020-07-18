@@ -1,0 +1,28 @@
+{
+    "firstName":"ravi 0",
+    "lastName":"patel 0",
+    "birthDate":"03/14/1990",
+    "cellPhone":"8153889383",
+    "emailId":"aryanrdp@gmail.om",
+    "addressList":
+    [
+      {
+        "addressLine1":"house 0,0","addressLine2":"sai0,0","street":"tulsivan","city":"valsad 0,0","state":"valsad 0,0","country":"india 0,0","pinCode":"12345"}
+    ,{
+      "addressLine1":"house 1,0","addressLine2":"sai1,0","street":"tulsivan","city":"valsad 1,0","state":"valsad 1,0","country":"india 1,0","pinCode":"12345"}
+    ],
+    "user":{
+      "userName":"ravidpatel",
+      "password":"ravi1990",
+      "isActive":1,
+      "roles":[
+        {
+          "roleName":"ADMIN"
+        },
+        {
+          "roleName":"USER"
+        }
+      ]
+    }
+
+}

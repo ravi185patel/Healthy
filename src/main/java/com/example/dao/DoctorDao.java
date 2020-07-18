@@ -4,6 +4,8 @@ import com.example.entity.Doctor;
 import com.example.repository.Dao;
 import com.example.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -31,8 +33,8 @@ public class DoctorDao implements Dao<Doctor> {
     }
 
     @Override
-    public void update(Doctor Doctor) {
-        DoctorRepository.save(Doctor);
+    public Doctor update(Doctor Doctor) {
+        return DoctorRepository.save(Doctor);
     }
 
     @Override
@@ -46,8 +48,13 @@ public class DoctorDao implements Dao<Doctor> {
     }
 
     @Override
-    public Doctor find(Long id) {
-        return DoctorRepository.findById(id).get();
+    public Optional<Doctor> find(Long id) {
+        return DoctorRepository.findById(id);
+    }
+
+    @Override
+    public Page<Doctor> findAll(Pageable pageable) {
+        return null;
     }
 }
 

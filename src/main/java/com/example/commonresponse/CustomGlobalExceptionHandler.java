@@ -1,9 +1,11 @@
 package com.example.commonresponse;
 
 
+import com.example.userdefineexception.FileNotFoundException;
+import com.example.userdefineexception.PathDoesNotExistsException;
+import com.example.userdefineexception.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,12 +48,29 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("error", errorResponse);
         return new ResponseEntity<>(body, headers, status);
     }
-
-    @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="IOException occured")
+    @ExceptionHandler(RecordNotFoundException.class)
+    protected ResponseEntity<Object> handleNoRecordFound(RecordNotFoundException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("version", version);
+        errorResponse.setMessage(ex.getLocalizedMessage());
+        body.put("error", errorResponse);
+        return new ResponseEntity<>(body,HttpStatus.NOT_FOUND);
+    }
     @ExceptionHandler(FileNotFoundException.class)
-    public void handleIOException(){
-        logger.error("IOException handler executed");
-        //returning 404 error code
+    protected ResponseEntity<Object> handleNoFileNotFoundException(FileNotFoundException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("version", version);
+        errorResponse.setMessage(ex.getLocalizedMessage());
+        body.put("error", errorResponse);
+        return new ResponseEntity<>(body,HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(PathDoesNotExistsException.class)
+    protected ResponseEntity<Object> handlePathDoesNotExistsException(PathDoesNotExistsException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("version", version);
+        errorResponse.setMessage(ex.getLocalizedMessage());
+        body.put("error", errorResponse);
+        return new ResponseEntity<>(body,HttpStatus.NOT_FOUND);
     }
 }
 

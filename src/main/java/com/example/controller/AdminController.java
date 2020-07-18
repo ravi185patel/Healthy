@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponses;
 public class AdminController {
 
     @Autowired
-    private ServiceI<PatientModel, PatientModel> patientService;
+    private ServiceI<PatientModel> patientService;
 
     @Autowired
     private Provider<CommonResponse> commonResponseProvider;

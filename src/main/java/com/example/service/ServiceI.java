@@ -2,12 +2,9 @@ package com.example.service;
 
 import java.util.List;
 
-public interface ServiceI<T,R> {
-//    R add(T t);
-    R get(Long id);
-    List<R> getAll();
-    R add(T t);
-//    R delete(T t);
-//    R delete(Long id);
-    R update(T t);
+public interface ServiceI<T> {
+    T get(Long id);
+    List<T> getAll();
+    T add(T t);
+    T update(T t);
 }

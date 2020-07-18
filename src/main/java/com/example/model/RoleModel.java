@@ -4,9 +4,10 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Component
-public class RoleModel {
+public class RoleModel implements Serializable {
 
     private Long id;
 

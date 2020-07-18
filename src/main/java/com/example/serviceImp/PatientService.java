@@ -1,20 +1,26 @@
 package com.example.serviceImp;
 
+import com.example.entity.Doctor;
 import com.example.entity.Patient;
 import com.example.mapper.MapperInterface;
 import com.example.model.PatientModel;
 import com.example.repository.Dao;
+import com.example.repository.PatientDaoI;
 import com.example.service.PatientServiceI;
+import com.example.userdefineexception.RecordNotFoundException;
+import com.example.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class PatientService implements PatientServiceI<PatientModel,PatientModel> {
+public class PatientService implements PatientServiceI<PatientModel> {
 
     @Autowired
-    private Dao<Patient> patientDao;
+    private PatientDaoI<Patient> patientDao;
 
     @Autowired
     private MapperInterface<PatientModel, Patient> patientMapper;
@@ -25,18 +31,32 @@ public class PatientService implements PatientServiceI<PatientModel,PatientModel
     }
 
     @Override
+    public PatientModel getByUserId(Long id) {
+        Optional<Patient> optionalPatient=patientDao.findByUserId(id);
+        if(!optionalPatient.isPresent()){
+            throw new RecordNotFoundException("Patient not found");
+        }
+        return patientMapper.entityToModel(optionalPatient.get());
+    }
+
+    @Transactional(rollbackOn = Exception.class,value = Transactional.TxType.REQUIRED)
+    @Override
     public PatientModel add(PatientModel patientModel) {
-//        Patient patient=patientMapper.modelToEntity(patientModel);
-////        patient.getPerson().setId(null);
-//        patient=patientDao.save(patient);
-//        System.out.println("call function");
-//        PatientModel res=patientMapper.entityToModel(patient);
-        return patientMapper.entityToModel(patientDao.save(patientMapper.modelToEntity(patientModel)));
+//        return patientMapper.entityToModel(patientDao.save(patientMapper.modelToEntity(patientModel)));
+        Patient patient=patientDao.save(patientMapper.modelToEntity(patientModel));
+        if(patient!=null){
+            Utility.createDir("./upload/"+patient.getId());
+        }
+        return patientMapper.entityToModel(patient);
     }
 
     @Override
     public PatientModel get(Long id) {
-        return patientMapper.entityToModel(patientDao.find(id));
+        Optional<Patient> optionalPatient=patientDao.find(id);
+        if(!optionalPatient.isPresent()){
+            throw new RecordNotFoundException("Patient not found");
+        }
+        return patientMapper.entityToModel(optionalPatient.get());
     }
 
     @Override

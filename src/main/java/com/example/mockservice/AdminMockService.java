@@ -43,9 +43,9 @@ public class AdminMockService {
         return usersRepository.save(user);
     }
 
-    public Patient getPatient(Long id){
-        return patientDao.find(id);
-    }
+//    public Patient getPatient(Long id){
+//        return patientDao.find(id);
+//    }
 
     public Users getUser(Long id){
         Optional<Users> op=usersRepository.findById(id);

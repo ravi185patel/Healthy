@@ -6,6 +6,7 @@ import com.example.model.DoctorModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
@@ -59,5 +60,10 @@ public class DoctorMapper implements MapperInterface<DoctorModel, Doctor> {
 //            DoctorModelList.add(DoctorModel);
 //        });
         return DoctorModelList;
+    }
+
+    @Override
+    public Page<DoctorModel> entityToModel(Page<Doctor> r) {
+        return null;
     }
 }

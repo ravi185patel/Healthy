@@ -29,16 +29,9 @@ public class LoginController {
 
     @GetMapping("/api/login")
     public ResponseEntity<Object> successfullLogin(@AuthenticationPrincipal final UserDetails userDetails){
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (principal instanceof UserDetails) {
-//            return ((UserDetails)principal);
-//        } else {
-//            return null;
-//        }
         UsersModel user=userSerivce.get(userDetails.getUsername());
         user.setPassword(null);
         return commonResponseProvider.get().getSuccessFullResponse(user,true);
-//        return userDetails;
     }
 
     @PostMapping("/api/register")

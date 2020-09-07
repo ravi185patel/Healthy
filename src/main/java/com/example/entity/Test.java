@@ -10,14 +10,13 @@ public class Test implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-
     private Long doctorId;
+    private String parentTestName;
+    private Long patientId;
 
     @ManyToOne
     @JoinColumn(name = "doctorId",insertable = false,updatable = false)
     private Doctor doctor;
-
-    private Long patientId;
 
     @ManyToOne
     @JoinColumn(name = "patientId",insertable = false,updatable = false)
@@ -70,4 +69,13 @@ public class Test implements Serializable {
 //    public void setBloodTestMaster(BloodTestMaster bloodTestMaster) {
 //        this.bloodTestMaster = bloodTestMaster;
 //    }
+
+
+    public String getParentTestName() {
+        return parentTestName;
+    }
+
+    public void setParentTestName(String parentTestName) {
+        this.parentTestName = parentTestName;
+    }
 }

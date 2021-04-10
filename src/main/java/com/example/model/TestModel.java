@@ -24,6 +24,8 @@ public class TestModel implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private AccountModel account;
 
+    private String parentTestName;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +64,13 @@ public class TestModel implements Serializable {
 
     public void setAccount(AccountModel account) {
         this.account = account;
+    }
+
+    public String getParentTestName() {
+        return parentTestName;
+    }
+
+    public void setParentTestName(String parentTestName) {
+        this.parentTestName = parentTestName;
     }
 }
